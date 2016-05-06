@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent RegisterActivity = new Intent(this, RegisterActivity.class);
+        startActivity(RegisterActivity);
+
         //TODO erase stack
 
         if (!isUserLoggedIn()){
