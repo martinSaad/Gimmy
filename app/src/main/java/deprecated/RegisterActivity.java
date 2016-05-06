@@ -1,4 +1,4 @@
-package com.example.martinsaad.hackidc;
+package deprecated;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,13 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.martinsaad.hackidc.AsyncResponse;
+import com.example.martinsaad.hackidc.Constants;
+import com.example.martinsaad.hackidc.DatePicker;
+import com.example.martinsaad.hackidc.HttpRequest;
+import com.example.martinsaad.hackidc.R;
+import com.example.martinsaad.hackidc.Request;
+import com.example.martinsaad.hackidc.User;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
