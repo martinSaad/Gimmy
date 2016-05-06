@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO getExerciseList
     private List<Exercise> getExerciseList(){
-        return null;
+        return new ArrayList<>();
     }
 
 

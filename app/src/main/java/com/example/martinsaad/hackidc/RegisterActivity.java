@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 }
 
-                String gend = gender.isChecked() ? "male" : "female";
+                String gend = gender.isChecked() ? "Male" : "Female";
                 User user = new User(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), pass, gend, birthDate.toString());
 
                 Gson gson = new Gson();
