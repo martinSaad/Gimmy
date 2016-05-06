@@ -1,10 +1,20 @@
 package com.example.martinsaad.hackidc;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by reabar on 6.5.2016.
  */
 public class User {
-    private String firstName, lastName, email, password, gender, birthDate;
+    @SerializedName("first_name")
+    private String firstName;
+    @SerializedName("last_name")
+    String lastName;
+    String email;
+    String password;
+    String gender;
+    @SerializedName("birthday")
+    String birthDate;
 
     public User(String firstName, String lastName, String email, String password, String gender, String birthDate){
         this.firstName = firstName;

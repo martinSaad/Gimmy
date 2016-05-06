@@ -10,6 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -23,19 +30,47 @@ public class RegisterActivity extends AppCompatActivity {
         Button registerButton = (Button) findViewById(R.id.button_Register_buttonRegister);
         final EditText firstName = (EditText) findViewById(R.id.editText_Register_firstName);
         final EditText lastName = (EditText) findViewById(R.id.editText_Register_lastName);
-        DatePicker birthDate = (DatePicker) findViewById(R.id.datePicker_Register_birthDay);
-        Switch gender = (Switch) findViewById(R.id.switch_Register_gender);
-        EditText email = (EditText) findViewById(R.id.editText_Register_email);
+        final DatePicker birthDate = (DatePicker) findViewById(R.id.datePicker_Register_birthDay);
+        final Switch gender = (Switch) findViewById(R.id.switch_Register_gender);
+        final EditText email = (EditText) findViewById(R.id.editText_Register_email);
         final EditText password = (EditText) findViewById(R.id.editText_Register_password);
         final EditText repeatPassword = (EditText) findViewById(R.id.editText_Register_repeatPassword);
-
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String pass = password.getText().toString();
                 String repeatPass = repeatPassword.getText().toString();
-                //User newUser = new User(firstName.getText().toString(), lastName.getText().toString());
+
+                if (firstName.getText().toString().isEmpty() == false && lastName.getText().toString().isEmpty() == false && email.getText().toString().isEmpty() == false && password.getText().toString().isEmpty() == false && repeatPassword.getText().toString().isEmpty() == false && birthDate.getText().toString().isEmpty() == false){
+                    if (pass.equals(repeatPass)){
+                        String gend = gender.isChecked() ? "Male" : "Female";
+                        User user = new User(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), pass, gend, birthDate.getText().toString());
+
+                        Gson gson = new Gson();
+                        String json = gson.toJson(user);
+                        List<String> parameters = new ArrayList<String>();
+                        parameters.add(Constants.TRAINEES);
+                        Request r = new Request("POST", parameters, json);
+                        try {
+                            new HttpRequest(new AsyncResponse() {
+                                @Override
+                                public void processFinish(String output) {
+
+                                }
+                            }).execute(r, null, null);
+                        }catch (Exception e){
+                            Log.d("error", e.toString());
+                        }
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "passwords are not equal", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                else {
+                    Toast.makeText(getApplicationContext(), "not all fields are full", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

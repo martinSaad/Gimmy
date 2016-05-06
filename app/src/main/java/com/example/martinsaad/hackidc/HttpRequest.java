@@ -1,5 +1,7 @@
 package com.example.martinsaad.hackidc;
 
+import android.os.AsyncTask;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,8 +13,37 @@ import java.util.List;
 /**
  * Created by martinsaad on 06/05/2016.
  */
-public class HttpRequest {
-    private String doGet(List<String> parameters) throws IOException {
+public class HttpRequest extends AsyncTask<Request, Void, String> {
+
+
+    public AsyncResponse delegate = null;
+
+    public HttpRequest(AsyncResponse delegate){
+        this.delegate = delegate;
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        delegate.processFinish(result);
+    }
+
+    @Override
+    protected String doInBackground(Request... params) {
+        String response = null;
+        try {
+            Request r = params[0];
+            if (r.getMethod().equals("GET"))
+                response = doGet(r.getParams());
+            else{
+                response = doPost(r.getBody(), r.getParams());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public String doGet(List<String> parameters) throws IOException {
 
         HttpURLConnection con = null;
         BufferedReader in = null;
@@ -21,7 +52,7 @@ public class HttpRequest {
         try {
             //add parameters
             for (String parameter : parameters)
-                url+="/" + parameter;
+                url+="/" + parameter + "/";
 
             URL obj = new URL(url);
             con = (HttpURLConnection) obj.openConnection();
@@ -59,7 +90,7 @@ public class HttpRequest {
 
     }
 
-    private void doPost(String body, List<String> parameters) throws IOException {
+    public String doPost(String body, List<String> parameters) throws IOException {
         HttpURLConnection con = null;
         BufferedReader in = null;
         String url = Constants.DB_BASE_URL;
@@ -67,7 +98,7 @@ public class HttpRequest {
         try {
             //add parameters
             for (String parameter : parameters)
-                url+="/" + parameter;
+                url+="/" + parameter + "/";
 
             URL obj = new URL(url);
             con = (HttpURLConnection) obj.openConnection();
@@ -102,12 +133,13 @@ public class HttpRequest {
             //print result
             System.out.println("Response: " + response.toString());
 
-        } catch (IOException e) {
+            return response.toString();
+        } catch (Exception e) {
             e.printStackTrace();
             throw new IOException();
         } finally {
             con.disconnect();
-            in.close();
+            //in.close();
         }
     }
 }

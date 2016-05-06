@@ -14,11 +14,11 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private HttpRequest httpRequest = new HttpRequest();
     ListView list;
     List<Exercise> data;
     MyAdapter adapter;
@@ -27,14 +27,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
         Intent main = new Intent(this,ExerciseDetailsActivity.class);
         startActivity(main);
+=======
+
+        Intent LoginActivity = new Intent(this, LoginActivity.class);
+        startActivity(LoginActivity);
+
+>>>>>>> 69a9e24c6237a2177dfb6f56c5d0a0771fcf05ba
         //TODO erase stack
 
-        if (!isUserLoggedIn()){
-            Intent LoginActivity = new Intent(this, LoginActivity.class);
-            startActivity(LoginActivity);
-        }
+//        if (!isUserLoggedIn()){
+//            Intent LoginActivity = new Intent(this, LoginActivity.class);
+//            startActivity(LoginActivity);
+//        }
 
         data = getExerciseList();
 
@@ -122,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO getExerciseList
     private List<Exercise> getExerciseList(){
-        return null;
+        return new ArrayList<>();
     }
 
 
