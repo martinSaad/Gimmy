@@ -20,8 +20,6 @@ import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    HttpRequest httpRequest = new HttpRequest();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +51,15 @@ public class RegisterActivity extends AppCompatActivity {
                         String json = gson.toJson(user);
                         List<String> parameters = new ArrayList<String>();
                         parameters.add(Constants.TRAINEES);
-                        Request r = new Request();
-                        r.method = "POST";
-                        r.params = parameters;
-                        r.body = json;
+                        Request r = new Request("POST", parameters, json);
                         try {
-                            new HttpRequest().execute(r, null, null);
-                            httpRequest.doPost(json, parameters);
-                        }catch (IOException e){
+                            new HttpRequest(new AsyncResponse() {
+                                @Override
+                                public void processFinish(String output) {
+
+                                }
+                            }).execute(r, null, null);
+                        }catch (Exception e){
                             Log.d("error", e.toString());
                         }
                     }

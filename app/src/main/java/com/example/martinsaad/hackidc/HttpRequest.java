@@ -13,21 +13,34 @@ import java.util.List;
 /**
  * Created by martinsaad on 06/05/2016.
  */
-public class HttpRequest extends AsyncTask<Request, Void, Void> {
+public class HttpRequest extends AsyncTask<Request, Void, String> {
+
+
+    public AsyncResponse delegate = null;
+
+    public HttpRequest(AsyncResponse delegate){
+        this.delegate = delegate;
+    }
 
     @Override
-    protected Void doInBackground(Request... params) {
+    protected void onPostExecute(String result) {
+        delegate.processFinish(result);
+    }
+
+    @Override
+    protected String doInBackground(Request... params) {
+        String response = null;
         try {
             Request r = params[0];
-            if (r.method.equals("GET"))
-                doGet(r.params);
+            if (r.getMethod().equals("GET"))
+                response = doGet(r.getParams());
             else{
-                doPost(r.body, r.params);
+                response = doPost(r.getBody(), r.getParams());
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return null;
+        return response;
     }
 
     public String doGet(List<String> parameters) throws IOException {
@@ -77,7 +90,7 @@ public class HttpRequest extends AsyncTask<Request, Void, Void> {
 
     }
 
-    public void doPost(String body, List<String> parameters) throws IOException {
+    public String doPost(String body, List<String> parameters) throws IOException {
         HttpURLConnection con = null;
         BufferedReader in = null;
         String url = Constants.DB_BASE_URL;
@@ -120,6 +133,7 @@ public class HttpRequest extends AsyncTask<Request, Void, Void> {
             //print result
             System.out.println("Response: " + response.toString());
 
+            return response.toString();
         } catch (Exception e) {
             e.printStackTrace();
             throw new IOException();

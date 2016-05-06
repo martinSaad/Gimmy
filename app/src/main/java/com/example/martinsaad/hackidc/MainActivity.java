@@ -19,7 +19,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private HttpRequest httpRequest = new HttpRequest();
     ListView list;
     List<Exercise> data;
     MyAdapter adapter;
@@ -29,15 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent RegisterActivity = new Intent(this, RegisterActivity.class);
-        startActivity(RegisterActivity);
+        Intent LoginActivity = new Intent(this, LoginActivity.class);
+        startActivity(LoginActivity);
 
         //TODO erase stack
 
-        if (!isUserLoggedIn()){
-            Intent LoginActivity = new Intent(this, LoginActivity.class);
-            startActivity(LoginActivity);
-        }
+//        if (!isUserLoggedIn()){
+//            Intent LoginActivity = new Intent(this, LoginActivity.class);
+//            startActivity(LoginActivity);
+//        }
 
         data = getExerciseList();
 
