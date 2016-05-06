@@ -38,35 +38,35 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText password = (EditText) findViewById(R.id.editText_Register_password);
         final EditText repeatPassword = (EditText) findViewById(R.id.editText_Register_repeatPassword);
 
-
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String pass = password.getText().toString();
                 String repeatPass = repeatPassword.getText().toString();
 
-                if (firstName!=null && lastName!=null && email!=null && password!=null && repeatPassword!=null){
-                    if (!pass.equals(repeatPass)){
-                        Toast.makeText(getApplicationContext(), "passwords not the same", Toast.LENGTH_SHORT).show();
+                if (firstName.getText().toString().isEmpty() == false && lastName.getText().toString().isEmpty() == false && email.getText().toString().isEmpty() == false && password.getText().toString().isEmpty() == false && repeatPassword.getText().toString().isEmpty() == false && birthDate.getText().toString().isEmpty() == false){
+                    if (pass.equals(repeatPass)){
+                        String gend = gender.isChecked() ? "Male" : "Female";
+                        User user = new User(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), pass, gend, birthDate.getText().toString());
+
+                        Gson gson = new Gson();
+                        String json = gson.toJson(user);
+                        List<String> parameters = new ArrayList<String>();
+                        parameters.add(Constants.TRAINEES);
+                        try {
+                            httpRequest.doPost(json, parameters);
+                        }catch (IOException e){
+                            Log.d("error", e.toString());
+                        }
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), "not all fields are full", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "passwords are not equal", Toast.LENGTH_SHORT).show();
                     }
                 }
 
-                String gend = gender.isChecked() ? "Male" : "Female";
-                User user = new User(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), pass, gend, birthDate.getText().toString());
-
-                Gson gson = new Gson();
-                String json = gson.toJson(user);
-                List<String> parameters = new ArrayList<String>();
-                parameters.add(Constants.TRAINEES);
-                try {
-                    httpRequest.doPost(json, parameters);
-                }catch (IOException e){
-                    Log.d("error", e.toString());
+                else {
+                    Toast.makeText(getApplicationContext(), "not all fields are full", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
