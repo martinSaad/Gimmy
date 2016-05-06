@@ -13,14 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import deprecated.ExerciseDetailsActivity;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentCommunicator {
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     LoginFragment loginFragment;
+    ExerciseDetailsFragment exerciseDetailsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +37,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Intent intent = new Intent(this, ExerciseDetailsActivity.class);
-        startActivity(intent);
-
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         loginFragment = new LoginFragment();
-        fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
+        exerciseDetailsFragment = new ExerciseDetailsFragment();
+        fragmentTransaction.add(R.id.main_frag_container, exerciseDetailsFragment, "exerciseDetailesFragment");
+        fragmentTransaction.show(exerciseDetailsFragment).addToBackStack("exerciseDetailesFragment").commit();
+        //fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
         //fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
 
         //TODO erase stack
