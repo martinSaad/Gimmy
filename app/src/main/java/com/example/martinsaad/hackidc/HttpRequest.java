@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by martinsaad on 06/05/2016.
  */
-public abstract class HttpRequest {
+public class HttpRequest {
     private String doGet(List<String> parameters) throws IOException {
 
         HttpURLConnection con = null;
