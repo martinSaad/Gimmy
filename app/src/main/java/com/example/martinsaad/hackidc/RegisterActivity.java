@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String repeatPass = repeatPassword.getText().toString();
 
                 if (firstName!=null && lastName!=null && email!=null && password!=null && repeatPassword!=null){
-                    if (pass.equals(repeatPass)){
+                    if (!pass.equals(repeatPass)){
                         Toast.makeText(getApplicationContext(), "passwords not the same", Toast.LENGTH_SHORT).show();
                     }
                     else{
@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 String gend = gender.isChecked() ? "Male" : "Female";
-                User user = new User(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), pass, gend, birthDate.toString());
+                User user = new User(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), pass, gend, birthDate.getText().toString());
 
                 Gson gson = new Gson();
                 String json = gson.toJson(user);

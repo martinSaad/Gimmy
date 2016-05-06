@@ -102,7 +102,7 @@ public class HttpRequest {
             //print result
             System.out.println("Response: " + response.toString());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new IOException();
         } finally {
