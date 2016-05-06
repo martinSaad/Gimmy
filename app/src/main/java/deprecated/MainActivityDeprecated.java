@@ -1,3 +1,4 @@
+/*
 package deprecated;
 
 import android.content.Intent;
@@ -133,3 +134,4 @@ public class MainActivityDeprecated extends AppCompatActivity {
     }
 
 }
+*/

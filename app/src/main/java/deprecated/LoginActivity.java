@@ -1,3 +1,4 @@
+/*
 package deprecated;
 
 import android.content.Intent;
@@ -8,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.martinsaad.hackidc.R;
-import com.example.martinsaad.hackidc.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,3 +42,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 }
+*/

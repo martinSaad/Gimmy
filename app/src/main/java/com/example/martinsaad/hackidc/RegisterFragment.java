@@ -1,10 +1,9 @@
 package com.example.martinsaad.hackidc;
 
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +14,13 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterFragment extends Fragment {
 
     FragmentCommunicator fragmentCommunicator;
+    HttpRequest httpRequest = new HttpRequest();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,28 +47,29 @@ public class RegisterFragment extends Fragment {
                 String pass = password.getText().toString();
                 String repeatPass = repeatPassword.getText().toString();
 
-                if (firstName!=null && lastName!=null && email!=null && password!=null && repeatPassword!=null){
-                    if (!pass.equals(repeatPass)){
-                        Toast.makeText(getActivity(), "passwords not the same", Toast.LENGTH_SHORT).show();
+                if (firstName.getText().toString().isEmpty() == false && lastName.getText().toString().isEmpty() == false && email.getText().toString().isEmpty() == false && password.getText().toString().isEmpty() == false && repeatPassword.getText().toString().isEmpty() == false && birthDate.getText().toString().isEmpty() == false){
+                    if (pass.equals(repeatPass)){
+                        String gend = gender.isChecked() ? "Male" : "Female";
+                        User user = new User(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), pass, gend, birthDate.getText().toString());
+
+                        Gson gson = new Gson();
+                        String json = gson.toJson(user);
+                        List<String> parameters = new ArrayList<String>();
+                        parameters.add(Constants.TRAINEES);
+/*                        try {
+                            httpRequest.doPost(json, parameters);
+                        }catch (IOException e){
+                            Log.d("error", e.toString());
+                        }*/
                     }
                     else{
-                        Toast.makeText(getActivity(), "not all fields are full", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "passwords are not equal", Toast.LENGTH_SHORT).show();
                     }
                 }
 
-                String gend = gender.isChecked() ? "Male" : "Female";
-                User user = new User(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), pass, gend, birthDate.getText().toString());
-
-                Gson gson = new Gson();
-                String json = gson.toJson(user);
-                List<String> parameters = new ArrayList<String>();
-                parameters.add(Constants.TRAINEES);
-                try {
-                    httpRequest.doPost(json, parameters);
-                }catch (IOException e){
-                    Log.d("error", e.toString());
+                else {
+                    Toast.makeText(getActivity(), "not all fields are full", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
