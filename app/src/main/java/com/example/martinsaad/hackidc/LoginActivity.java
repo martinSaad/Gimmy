@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -22,9 +23,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Button loginButton = (Button) findViewById(R.id.button_Login);
+        EditText username = (EditText) findViewById(R.id.editText_usernameLogin);
+        EditText password = (EditText) findViewById(R.id.editText_passwordLogin);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(mainIntent);
             }
         });
