@@ -1,15 +1,16 @@
-package com.example.martinsaad.hackidc;
+/*
+package deprecated;
 
-import android.media.Image;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import com.example.martinsaad.hackidc.R;
 
 public class ExerciseDetailsActivity extends AppCompatActivity {
     ImageButton startChrono;
@@ -60,3 +61,4 @@ public class ExerciseDetailsActivity extends AppCompatActivity {
         });
     }
 }
+*/

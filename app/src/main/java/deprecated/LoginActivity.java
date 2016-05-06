@@ -1,4 +1,5 @@
-package com.example.martinsaad.hackidc;
+/*
+package deprecated;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+import com.example.martinsaad.hackidc.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,3 +91,4 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 }
+*/

@@ -10,8 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.martinsaad.hackidc.RegisterActivity"
-    tools:showIn="@layout/activity_register">
+    tools:context="com.example.martinsaad.hackidc.RegisterFragment">
 
     <EditText
         android:layout_width="fill_parent"
@@ -78,6 +77,5 @@
         android:id="@+id/button_Register_buttonRegister"
         android:layout_gravity="center"
         android:layout_marginTop="30dp" />
-
 
 </LinearLayout>

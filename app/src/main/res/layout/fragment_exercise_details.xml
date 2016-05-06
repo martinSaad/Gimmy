@@ -8,34 +8,34 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.martinsaad.hackidc.ExerciseDetailsActivity"
+    tools:context="deprecated.ExerciseDetailsActivity"
     android:weightSum="1">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="66dp"
         android:weightSum="1">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="39dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Exercise Name"
-        android:id="@+id/textView"
-        android:layout_marginTop="30dp"
-        android:layout_weight="1.04" />
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Exercise Name"
+            android:id="@+id/textView"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1.04" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            >
 
-        <ImageButton
-            android:id="@+id/button_excerise_details"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
-            android:layout_gravity="center"
-            android:background="@drawable/exercisedetails"
-            android:gravity="center"/>
-    </FrameLayout>
+            <ImageButton
+                android:id="@+id/button_excerise_details"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center"
+                android:background="@drawable/exercisedetails"
+                android:gravity="center"/>
+        </FrameLayout>
     </LinearLayout>
 
 
@@ -48,7 +48,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:orientation="vertical"
-        tools:context="com.example.martinsaad.hackidc.ExerciseDetailsActivity"
+        tools:context="deprecated.ExerciseDetailsActivity"
         android:weightSum="1">
 
         <LinearLayout android:layout_width="match_parent"
@@ -60,30 +60,30 @@
             <LinearLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="1">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                >
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    >
 
 
-                <ImageButton
-                    android:id="@+id/lastWeight"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/lastweight"
-                    android:gravity="center"/>
-            </FrameLayout>
+                    <ImageButton
+                        android:id="@+id/lastWeight"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/lastweight"
+                        android:gravity="center"/>
+                </FrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Set1"
-                android:id="@+id/Set1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Set1"
+                    android:id="@+id/Set1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                     android:id="@+id/Set5"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp" />
-        </LinearLayout>
+            </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="1"
@@ -189,38 +189,38 @@
                 android:weightSum="1"
                 android:layout_marginTop="30dp">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                >
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    >
 
-                <ImageButton
-                    android:id="@+id/timer"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    <ImageButton
+                        android:id="@+id/timer"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/timer"
+                        android:gravity="center"/>
+                </FrameLayout>
+                <Chronometer
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chronometer"
+                    android:layout_weight="1.10"
                     android:layout_gravity="center"
-                    android:background="@drawable/timer"
-                    android:gravity="center"/>
-            </FrameLayout>
-            <Chronometer
-                android:layout_width="105dp"
-                android:layout_height="match_parent"
-                android:id="@+id/chronometer"
-                android:layout_weight="1.10"
-                android:layout_gravity="center"
-                android:allowUndo="false"
-                android:textSize="50dp"
-                android:typeface="serif"
-                />
+                    android:allowUndo="false"
+                    android:textSize="50dp"
+                    android:typeface="serif"
+                    />
             </LinearLayout>
-    </LinearLayout>
+        </LinearLayout>
 
 
         <LinearLayout android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
             android:layout_marginTop="40dp">
 
             <ImageButton
@@ -241,5 +241,5 @@
                 android:layout_marginLeft="110dp" />
         </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>
 </LinearLayout>
