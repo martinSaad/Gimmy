@@ -2,25 +2,55 @@ package com.example.martinsaad.hackidc;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private HttpRequest httpRequest = new HttpRequest();
+    ListView list;
+    List<Exercise> data;
+    MyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Intent main = new Intent(this,ExerciseDetailsActivity.class);
+        startActivity(main);
+        //TODO erase stack
 
-        Intent registerActivity = new Intent(this, ExerciseDetailsActivity.class);
-        startActivity(registerActivity);
+        if (!isUserLoggedIn()){
+            Intent LoginActivity = new Intent(this, LoginActivity.class);
+            startActivity(LoginActivity);
+        }
+
+        data = getExerciseList();
+
+        list = (ListView) findViewById(R.id.listView_exerciseList);
+        adapter = new MyAdapter();
+        list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), ExerciseDetailsActivity.class);
+                intent.putExtra("exercise_id", data.get(position).id);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -44,4 +74,61 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+    //adapter class
+    class MyAdapter extends BaseAdapter {
+        @Override
+        public int getCount() {
+            return data.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return data.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if(convertView == null){
+                LayoutInflater inflater = getLayoutInflater();
+                convertView = inflater.inflate(R.layout.tableview_row_exercise_list,null);
+                Log.d("TAG", "create view:" + position);
+            }
+
+            else {
+                Log.d("TAG", "use convert view:" + position);
+            }
+
+            TextView exerciseName = (TextView) convertView.findViewById(R.id.textView_Row_exercise_name);
+            return convertView;
+        }
+    }
+
+
+
+
+    //TODO isUserLoggedIn
+    private boolean isUserLoggedIn(){
+        return true;
+    }
+
+
+    //TODO getExerciseList
+    private List<Exercise> getExerciseList(){
+        return null;
+    }
+
+
+    public class Exercise{
+        String id;
+        String name;
+    }
+
 }

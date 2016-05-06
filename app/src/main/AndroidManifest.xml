@@ -30,9 +30,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".ExerciseDetailsActivity"
-            android:label="Exercise Information"
-        />
+        <activity
+            android:name=".ExerciseDetailsActivity"
+            android:label="Exercise Information" />
+        <activity android:name=".testActivity"></activity>
     </application>
 
 </manifest>

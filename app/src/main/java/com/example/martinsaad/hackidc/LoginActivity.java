@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //TODO make login request and save user is
                 startActivity(mainIntent);
             }
         });
