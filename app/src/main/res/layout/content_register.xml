@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editText_firstName"
+        android:id="@+id/editText_Register_firstName"
         android:hint="First Name"
         android:layout_marginTop="30dp" />
 
@@ -27,21 +27,21 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/editText_lastName"
+        android:id="@+id/editText_Register_lastName"
         android:hint="Last Name"
         android:layout_marginTop="15dp" />
 
     <com.example.martinsaad.hackidc.DatePicker
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/datePicker_birthDay"
+        android:id="@+id/datePicker_Register_birthDay"
         android:hint="Birth Date"
         android:layout_marginTop="15dp" />
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/switch_gender"
+        android:id="@+id/switch_Register_gender"
         android:layout_gravity="center_horizontal"
         android:checked="false"
         android:textOn="Male"
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editText_email"
+        android:id="@+id/editText_Register_email"
         android:hint="Email" />
 
     <EditText
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText_password"
+        android:id="@+id/editText_Register_password"
         android:hint="password" />
 
     <EditText
@@ -68,14 +68,14 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText_repeatPassword"
+        android:id="@+id/editText_Register_repeatPassword"
         android:hint="repeat password" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:id="@+id/buttonRegister"
+        android:id="@+id/button_Register_buttonRegister"
         android:layout_gravity="center"
         android:layout_marginTop="30dp" />
 

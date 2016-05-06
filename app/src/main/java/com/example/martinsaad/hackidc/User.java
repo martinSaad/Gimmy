@@ -4,7 +4,16 @@ package com.example.martinsaad.hackidc;
  * Created by reabar on 6.5.2016.
  */
 public class User {
-    String firstName, lastName, email, password, gender, birthDate;
+    private String firstName, lastName, email, password, gender, birthDate;
+
+    public User(String firstName, String lastName, String email, String password, String gender, String birthDate){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.birthDate = birthDate;
+    }
 
     public String getFirstName() {
         return firstName;

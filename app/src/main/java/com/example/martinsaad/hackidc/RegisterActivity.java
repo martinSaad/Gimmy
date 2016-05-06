@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -19,14 +20,22 @@ public class RegisterActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button registerButton = (Button) findViewById(R.id.buttonRegister);
-        final EditText firstName = (EditText) findViewById(R.id.editText_firstName);
-        final EditText lastName = (EditText) findViewById(R.id.editText_lastName);
+        Button registerButton = (Button) findViewById(R.id.button_Register_buttonRegister);
+        final EditText firstName = (EditText) findViewById(R.id.editText_Register_firstName);
+        final EditText lastName = (EditText) findViewById(R.id.editText_Register_lastName);
+        DatePicker birthDate = (DatePicker) findViewById(R.id.datePicker_Register_birthDay);
+        Switch gender = (Switch) findViewById(R.id.switch_Register_gender);
+        EditText email = (EditText) findViewById(R.id.editText_Register_email);
+        final EditText password = (EditText) findViewById(R.id.editText_Register_password);
+        final EditText repeatPassword = (EditText) findViewById(R.id.editText_Register_repeatPassword);
+
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String pass = password.getText().toString();
+                String repeatPass = repeatPassword.getText().toString();
+                //User newUser = new User(firstName.getText().toString(), lastName.getText().toString());
             }
         });
     }
