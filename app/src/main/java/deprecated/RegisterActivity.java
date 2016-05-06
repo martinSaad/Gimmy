@@ -1,3 +1,4 @@
+/*
 package deprecated;
 
 import android.os.Bundle;
@@ -79,3 +80,4 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 }
+*/

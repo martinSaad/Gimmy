@@ -4,6 +4,7 @@ package com.example.martinsaad.hackidc;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import java.util.List;
 public class RegisterFragment extends Fragment {
 
     FragmentCommunicator fragmentCommunicator;
-    HttpRequest httpRequest = new HttpRequest();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,11 +56,17 @@ public class RegisterFragment extends Fragment {
                         String json = gson.toJson(user);
                         List<String> parameters = new ArrayList<String>();
                         parameters.add(Constants.TRAINEES);
-/*                        try {
-                            httpRequest.doPost(json, parameters);
-                        }catch (IOException e){
+                        Request r = new Request("POST", parameters, json);
+                        try {
+                            new HttpRequest(new AsyncResponse() {
+                                @Override
+                                public void processFinish(String output) {
+
+                                }
+                            }).execute(r, null, null);
+                        }catch (Exception e){
                             Log.d("error", e.toString());
-                        }*/
+                        }
                     }
                     else{
                         Toast.makeText(getActivity(), "passwords are not equal", Toast.LENGTH_SHORT).show();
