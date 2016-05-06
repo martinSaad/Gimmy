@@ -53,7 +53,12 @@ public class RegisterActivity extends AppCompatActivity {
                         String json = gson.toJson(user);
                         List<String> parameters = new ArrayList<String>();
                         parameters.add(Constants.TRAINEES);
+                        Request r = new Request();
+                        r.method = "POST";
+                        r.params = parameters;
+                        r.body = json;
                         try {
+                            new HttpRequest().execute(r, null, null);
                             httpRequest.doPost(json, parameters);
                         }catch (IOException e){
                             Log.d("error", e.toString());

@@ -1,5 +1,7 @@
 package com.example.martinsaad.hackidc;
 
+import android.os.AsyncTask;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,7 +13,23 @@ import java.util.List;
 /**
  * Created by martinsaad on 06/05/2016.
  */
-public class HttpRequest {
+public class HttpRequest extends AsyncTask<Request, Void, Void> {
+
+    @Override
+    protected Void doInBackground(Request... params) {
+        try {
+            Request r = params[0];
+            if (r.method.equals("GET"))
+                doGet(r.params);
+            else{
+                doPost(r.body, r.params);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public String doGet(List<String> parameters) throws IOException {
 
         HttpURLConnection con = null;
@@ -21,7 +39,7 @@ public class HttpRequest {
         try {
             //add parameters
             for (String parameter : parameters)
-                url+="/" + parameter;
+                url+="/" + parameter + "/";
 
             URL obj = new URL(url);
             con = (HttpURLConnection) obj.openConnection();
@@ -67,7 +85,7 @@ public class HttpRequest {
         try {
             //add parameters
             for (String parameter : parameters)
-                url+="/" + parameter;
+                url+="/" + parameter + "/";
 
             URL obj = new URL(url);
             con = (HttpURLConnection) obj.openConnection();
@@ -107,7 +125,7 @@ public class HttpRequest {
             throw new IOException();
         } finally {
             con.disconnect();
-            in.close();
+            //in.close();
         }
     }
 }
