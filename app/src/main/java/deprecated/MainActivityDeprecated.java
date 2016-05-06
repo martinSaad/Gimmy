@@ -14,7 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.martinsaad.hackidc.ExerciseDetailsActivity;
 import com.example.martinsaad.hackidc.HttpRequest;
 import com.example.martinsaad.hackidc.R;
 

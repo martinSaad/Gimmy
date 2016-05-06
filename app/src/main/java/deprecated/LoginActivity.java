@@ -7,13 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.martinsaad.hackidc.MainActivity;
 import com.example.martinsaad.hackidc.R;
 import com.example.martinsaad.hackidc.RegisterActivity;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 
 public class LoginActivity extends AppCompatActivity {
 
