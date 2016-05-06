@@ -26,10 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("MARTIN", firstName.getText().toString());
-                Log.d("MARTIN", lastName.getText().toString());
+
             }
         });
     }
-
 }

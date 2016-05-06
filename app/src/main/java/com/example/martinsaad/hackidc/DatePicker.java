@@ -25,9 +25,9 @@ public class DatePicker extends EditText{
         private void init(){
             Calendar calendar = new GregorianCalendar();
             year = calendar.get(Calendar.YEAR);
-            month = calendar.get(Calendar.MONTH);
-            day = calendar.get(Calendar.DAY_OF_MONTH);
-            setText("" + day + "/" + (1+month) + "/" + year);
+//            month = calendar.get(Calendar.MONTH);
+//            day = calendar.get(Calendar.DAY_OF_MONTH);
+//            setText("" + day + "/" + (1+month) + "/" + year);
         }
 
         public interface OnDateSetListener{
@@ -123,7 +123,7 @@ public class DatePicker extends EditText{
                 DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        Log.d("TA", "date set" + year + "/" + monthOfYear + "/" + dayOfMonth);
+                        Log.d("TA", "date set" + year + "/" + (++monthOfYear) + "/" + dayOfMonth);
                         listener.done(year,monthOfYear,dayOfMonth);
                     }
 /*
