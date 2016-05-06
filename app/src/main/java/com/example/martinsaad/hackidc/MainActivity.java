@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent registerActivity = new Intent(this, RegisterActivity.class);
+        Intent registerActivity = new Intent(this, LoginActivity.class);
         startActivity(registerActivity);
     }
 
