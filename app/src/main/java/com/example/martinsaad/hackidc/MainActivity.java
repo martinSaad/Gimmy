@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     LoginFragment loginFragment;
+    SettingsFragment settingsFragment;
     ExerciseDetailsFragment exerciseDetailsFragment;
 
     @Override
@@ -37,14 +38,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        drawer.setClickable(false);
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         loginFragment = new LoginFragment();
-        exerciseDetailsFragment = new ExerciseDetailsFragment();
-        fragmentTransaction.add(R.id.main_frag_container, exerciseDetailsFragment, "exerciseDetailesFragment");
-        fragmentTransaction.show(exerciseDetailsFragment).addToBackStack("exerciseDetailesFragment").commit();
-        //fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
-        //fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
+        fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
+        fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
 
         //TODO erase stack
 
@@ -91,6 +90,18 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        switch (id){
+            case R.id.nav_manage_exercise:
+                break;
+
+            case R.id.nav_settings:
+                settingsFragment = new SettingsFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container, settingsFragment, "settingsFragment");
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+        }
+
         /*if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
@@ -127,6 +138,9 @@ public class MainActivity extends AppCompatActivity
                 fragmentTransaction.replace(R.id.main_frag_container,studentEditDetailsFragment, "studentEditDetailsFragment");
                 fragmentTransaction.addToBackStack("studentEditDetailsFragment").commit();
                 break;*/
+            case "logout":
+
+                break;
         }
         return null;
     }
