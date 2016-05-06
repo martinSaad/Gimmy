@@ -27,37 +27,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
-        Intent main = new Intent(this,ExerciseDetailsActivity.class);
-        startActivity(main);
-=======
 
-        Intent LoginActivity = new Intent(this, LoginActivity.class);
-        startActivity(LoginActivity);
-
->>>>>>> 69a9e24c6237a2177dfb6f56c5d0a0771fcf05ba
         //TODO erase stack
 
 //        if (!isUserLoggedIn()){
 //            Intent LoginActivity = new Intent(this, LoginActivity.class);
 //            startActivity(LoginActivity);
 //        }
-
-        data = getExerciseList();
-
-        list = (ListView) findViewById(R.id.listView_exerciseList);
-        adapter = new MyAdapter();
-        list.setAdapter(adapter);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), ExerciseDetailsActivity.class);
-                intent.putExtra("exercise_id", data.get(position).id);
-                startActivity(intent);
-            }
-        });
-
     }
 
     @Override
