@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentCommunicator {
 
@@ -45,22 +47,9 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        performanceFragment = new PerformanceFragment();
-        fragmentTransaction.add(R.id.main_frag_container, performanceFragment, "performanceFragment");
-        fragmentTransaction.show(performanceFragment).addToBackStack("performanceFragment").commit();
-/*        loginFragment = new LoginFragment();
-        fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
-        fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();*/
-//        loginFragment = new LoginFragment();
-//        fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
-//        fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
-
-        //TODO erase stack
-
-//        if (!isUserLoggedIn()){
-//            Intent LoginActivity = new Intent(this, LoginActivity.class);
-//            startActivity(LoginActivity);
-//        }
+        exerciseDetailsFragment = new ExerciseDetailsFragment();
+        fragmentTransaction.add(R.id.main_frag_container, exerciseListFragment, "exerciseListFragment");
+        fragmentTransaction.show(exerciseListFragment).addToBackStack("exerciseListFragment").commit();
     }
     @Override
     public void onBackPressed() {
@@ -72,28 +61,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-/*    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }*/
-
-/*    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -101,7 +68,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch (id){
-            case R.id.nav_manage_exercise:
+            case R.id.nav_exercise_details:
+                exerciseDetailsFragment = new ExerciseDetailsFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container, exerciseDetailsFragment, "exerciseDetailsFragment");
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
 
             case R.id.nav_settings:
@@ -143,7 +114,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public String passString(String text) {
+    public void passString(String text) {
         switch (text){
             case "loginFragment":
                 loginFragment = new LoginFragment();
@@ -181,7 +152,19 @@ public class MainActivity extends AppCompatActivity
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
         }
-        return null;
+    }
+
+    @Override
+    public void passData(Object[] data) {
+        switch ((String) data[0]) {
+            case "exerciseDetailsFragment":
+                exerciseDetailsFragment = new ExerciseDetailsFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container, exerciseDetailsFragment, "exerciseDetailsFragment");
+                exerciseDetailsFragment.data = (List) data[1];
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+        }
     }
 
     public void setDrawerState(boolean isEnabled) {

@@ -1,13 +1,9 @@
 package com.example.martinsaad.hackidc;
 
-
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +58,7 @@ public class LoginFragment extends Fragment {
                             else{
                                 //save user id to file
                                 writeToFile(output);
-                                fragmentCommunicator.passString("exerciseDetailsFragment");
+                                fragmentCommunicator.passString("exerciseListFragment");
                             }
                         }
                     }).execute(r, null, null);

@@ -37,10 +37,6 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.android.support:support-v4:23.3.0'
-<<<<<<< HEAD
     compile 'com.jjoe64:graphview:4.0.0'
-
-=======
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
->>>>>>> ea56bdf19c90cf936c2a73cea1ac1a1c96bb3bca
 }

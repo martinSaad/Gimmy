@@ -33,6 +33,7 @@ public class ExerciseDetailsFragment extends Fragment {
     long time = 0;
     FragmentCommunicator fragmentCommunicator;
     static int flag = 1;
+    List<Exercises> data = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

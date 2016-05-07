@@ -28,9 +28,8 @@ import java.util.List;
 
 
 public class ExerciseListFragment extends ListFragment implements OnItemClickListener {
-
-
-    List<Exercies> data = null;
+    FragmentCommunicator fragmentCommunicator;
+    List<Exercises> data = null;
     MyAdapter adapter = null;
 
     @Override
@@ -46,7 +45,7 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
             JSONArray arr = new JSONArray(response);
             for (int i=0; i<arr.length(); i++){
                 JSONObject obj = arr.getJSONObject(i);
-                Exercies ex = gson.fromJson(obj.toString(), Exercies.class);
+                Exercises ex = gson.fromJson(obj.toString(), Exercises.class);
                 data.add(ex);
             }
         }catch (JSONException e){
@@ -59,6 +58,8 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
         super.onActivityCreated(savedInstanceState);
         data = new ArrayList<>();
         getListView().setOnItemClickListener(this);
+        fragmentCommunicator = (FragmentCommunicator) getActivity();
+        fragmentCommunicator.passString("enableDrawer");
 
         String userId = Constants.readFromFile(getActivity().getApplicationContext());
 
