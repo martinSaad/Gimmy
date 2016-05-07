@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity
     FragmentTransaction fragmentTransaction;
     LoginFragment loginFragment;
     ExerciseListFragment exerciseListFragment;
+    ExerciseInformationFragment exerciseInformationFragment;
     SettingsFragment settingsFragment;
     ExerciseDetailsFragment exerciseDetailsFragment;
     //ExerciseListFragment exerciseListFragment;
@@ -49,9 +50,9 @@ public class MainActivity extends AppCompatActivity
 //        fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
 //        fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
 
-        exerciseListFragment = new ExerciseListFragment();
-        fragmentTransaction.add(R.id.main_frag_container, exerciseListFragment, "exerciseListFragment");
-        fragmentTransaction.show(exerciseListFragment).addToBackStack("exerciseListFragment").commit();
+        exerciseInformationFragment = new ExerciseInformationFragment();
+        fragmentTransaction.add(R.id.main_frag_container, exerciseInformationFragment, "exerciseInformationFragment");
+        fragmentTransaction.show(exerciseInformationFragment).addToBackStack("exerciseInformationFragment").commit();
 
         //TODO erase stack
 

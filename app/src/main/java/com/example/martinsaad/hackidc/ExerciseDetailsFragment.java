@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -88,19 +90,18 @@ public class ExerciseDetailsFragment extends Fragment {
                                 //Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                JSONArray jsonArray = new JSONArray();
-                                jsonArray.put(output);
-                                JSONObject Jobject = null;
                                 try {
-                                    JSONArray finalJson = new JSONArray();
-                                    finalJson.put(jsonArray);
-                                    Jobject = new JSONObject();
-                                    Jobject = finalJson.getJSONObject(0);
+                                    JSONArray jsonArray = new JSONArray(output);
+                                    JSONObject Jobject = jsonArray.getJSONObject(0);
+                                    Gson gson = new Gson();
+                                    Exercies ex = gson.fromJson(Jobject.toString(), Exercies.class);
+
+                                    System.out.println(Jobject.toString());
                                 } catch (JSONException e) {
                                     System.out.println("2222222");
                                     e.printStackTrace();
                                 }
-                                System.out.println(Jobject.toString());
+
                                 System.out.println("**********");
                                 exersiceName.setText("aaaa");
                                 //System.out.println(output);

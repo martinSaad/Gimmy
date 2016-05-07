@@ -8,7 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 
 public class ExerciseInformationFragment extends Fragment {
@@ -20,5 +21,10 @@ public class ExerciseInformationFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        WebView myWebView = (WebView)getActivity().findViewById(R.id.webView);
+        myWebView.loadUrl("https://www.youtube.com/watch?v=Ho32Oh6b4jc");
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
     }
 }
