@@ -4,6 +4,7 @@ package com.example.martinsaad.hackidc;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +24,12 @@ public class LoginFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         fragmentCommunicator = (FragmentCommunicator) getActivity();
+        fragmentCommunicator.passString("cancelDrawer");
         Button loginButton = (Button) getActivity().findViewById(R.id.button_Login);
         Button registerButton = (Button) getActivity().findViewById(R.id.button_registerLogin);
         EditText username = (EditText) getActivity().findViewById(R.id.editText_usernameLogin);
         EditText password = (EditText) getActivity().findViewById(R.id.editText_passwordLogin);
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
