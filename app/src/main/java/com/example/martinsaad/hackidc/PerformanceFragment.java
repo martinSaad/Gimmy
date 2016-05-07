@@ -3,6 +3,7 @@ package com.example.martinsaad.hackidc;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class PerformanceFragment extends Fragment {
             @Override
             public void processFinish(String output) {
                 if (output==null){
+                    Log.d("blat","null");
                 }
                 else {
                     try {
@@ -57,12 +59,13 @@ public class PerformanceFragment extends Fragment {
                             int avg = (int) jsonObj.get("average");
                             dataPoints[i] = new DataPoint(i, avg);
                         }
-                        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
+                        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
+                        Log.d("blat","blat");
                         graph.addSeries(series);
                         Viewport viewport = graph.getViewport();
                         viewport.setYAxisBoundsManual(true);
-                        viewport.setMinY(0);
-                        viewport.setMaxY(10);
+                        /*viewport.setMinY(0);
+                        viewport.setMaxY(10);*/
                         viewport.setScrollable(true);
 
                     } catch (JSONException e){
@@ -70,40 +73,7 @@ public class PerformanceFragment extends Fragment {
                     }
                 }
             }
-/*
-                }
-            }
         }).execute(r, null, null);
-
-
-        // we get graph view instance
-        GraphView graph = (GraphView) getActivity().findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[jsonArray.length()]);
-        DataPoint[] dataPoints = new DataPoint[jsonArray.length()];
-        // data
-        for(int i = 0 ; i < jsonArray.length() ; i++){
-            try {
-                JSONObject tempObj = (JSONObject) jsonArray.get(i);
-                dataPoints[i] = new DataPoint(i, tempObj.getInt("average"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-/*        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
-        });
-        graph.addSeries(series);*/
-            // customize a little bit viewport
-/*                Viewport viewport = graph.getViewport();
-        viewport.setYAxisBoundsManual(true);
-        viewport.setMinY(0);
-        viewport.setMaxY(10);
-        viewport.setScrollable(true);*/
-        });
     }
 }
 
