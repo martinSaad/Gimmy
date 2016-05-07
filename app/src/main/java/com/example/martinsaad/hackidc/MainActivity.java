@@ -21,11 +21,10 @@ public class MainActivity extends AppCompatActivity
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     LoginFragment loginFragment;
-<<<<<<< HEAD
-    ExerciseListFragment exerciseListFragment;
+
+    //ExerciseListFragment exerciseListFragment;
     ExerciseInformationFragment exerciseInformationFragment;
-=======
->>>>>>> 3173a1eed56d2ab8402c523221aa9d7b0363df80
+
     SettingsFragment settingsFragment;
     ExerciseDetailsFragment exerciseDetailsFragment;
     ExerciseListFragment exerciseListFragment;
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-<<<<<<< HEAD
+
 //        loginFragment = new LoginFragment();
 //        fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
 //        fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
@@ -67,11 +66,7 @@ public class MainActivity extends AppCompatActivity
 //            Intent LoginActivity = new Intent(this, LoginActivity.class);
 //            startActivity(LoginActivity);
 //        }
-=======
-        exerciseDetailsFragment = new ExerciseDetailsFragment();
-        fragmentTransaction.add(R.id.main_frag_container, exerciseListFragment, "exerciseListFragment");
-        fragmentTransaction.show(exerciseListFragment).addToBackStack("exerciseListFragment").commit();
->>>>>>> 3173a1eed56d2ab8402c523221aa9d7b0363df80
+
     }
     @Override
     public void onBackPressed() {

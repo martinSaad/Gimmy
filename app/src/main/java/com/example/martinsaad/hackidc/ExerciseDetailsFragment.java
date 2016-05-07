@@ -17,8 +17,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -129,27 +127,6 @@ public class ExerciseDetailsFragment extends Fragment {
                     new HttpRequest(new AsyncResponse() {
                         @Override
                         public void processFinish(String output) {
-<<<<<<< HEAD
-                            if (output==null){
-                                //Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                try {
-                                    JSONArray jsonArray = new JSONArray(output);
-                                    JSONObject Jobject = jsonArray.getJSONObject(0);
-                                    Gson gson = new Gson();
-                                    Exercies ex = gson.fromJson(Jobject.toString(), Exercies.class);
-
-                                    System.out.println(Jobject.toString());
-                                } catch (JSONException e) {
-                                    System.out.println("2222222");
-                                    e.printStackTrace();
-                                }
-
-                                System.out.println("**********");
-                                exersiceName.setText("aaaa");
-                                //System.out.println(output);
-=======
                             try {
                                 JSONArray jsonArray = new JSONArray(output);
                                 JSONObject Jobject = jsonArray.getJSONObject(0);
@@ -158,7 +135,6 @@ public class ExerciseDetailsFragment extends Fragment {
                                 //exerciseName.setText(e.getExerciseInstance().getName());
                             } catch (JSONException e) {
                                 e.printStackTrace();
->>>>>>> 3173a1eed56d2ab8402c523221aa9d7b0363df80
                             }
                         }
                     }).execute(r, null, null);
