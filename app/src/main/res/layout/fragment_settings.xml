@@ -73,16 +73,6 @@
             android:layout_height="wrap_content"
             android:inputType="numberSigned"
             android:ems="10"
-            android:hint="Rest Time"
-            android:id="@+id/editRestTimeExercise"
-            android:layout_weight="1"
-            android:layout_marginTop="30dp" />
-
-        <EditText
-            android:layout_width="106dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberSigned"
-            android:ems="10"
             android:hint="My Weight"
             android:id="@+id/editweight"
             android:layout_weight="1"
