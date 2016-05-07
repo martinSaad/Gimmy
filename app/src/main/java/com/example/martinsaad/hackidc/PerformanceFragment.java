@@ -46,7 +46,6 @@ public class PerformanceFragment extends Fragment {
             @Override
             public void processFinish(String output) {
                 if (output==null){
-                    Log.d("blat","null");
                 }
                 else {
                     try {
@@ -60,7 +59,6 @@ public class PerformanceFragment extends Fragment {
                             dataPoints[i] = new DataPoint(i, avg);
                         }
                         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
-                        Log.d("blat","blat");
                         graph.addSeries(series);
                         Viewport viewport = graph.getViewport();
                         viewport.setYAxisBoundsManual(true);

@@ -14,6 +14,7 @@ import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -23,8 +24,11 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +54,7 @@ public class ExerciseDetailsFragment extends Fragment {
         fragmentCommunicator.passString("enableDrawer");
         final ImageButton nextBtn = (ImageButton) getActivity().findViewById(R.id.next);
         final ImageButton changeExercise = (ImageButton) getActivity().findViewById(R.id.button_swap_exercise);
-        TextView exerciseName = (TextView) getActivity().findViewById(R.id.ExerciseName);
+        final TextView exerciseName = (TextView) getActivity().findViewById(R.id.ExerciseName);
         startChrono = (ImageButton) getActivity().findViewById(R.id.timer);
         chrono = (Chronometer) getActivity().findViewById(R.id.chronometer);
 
@@ -89,7 +93,7 @@ public class ExerciseDetailsFragment extends Fragment {
                     try {
                         json.put("training_plan_exercise_details", ex.getId());
                         json.put("sets", 5);
-                        json.put("weight", newSet1.getText().toString()+","+newSet2.getText().toString()+","+newSet3.getText().toString()+","+newSet4.getText().toString()+","+newSet5.getText().toString());
+                        json.put("weight", newSet1.getText().toString() + "," + newSet2.getText().toString() + "," + newSet3.getText().toString() + "," + newSet4.getText().toString() + "," + newSet5.getText().toString());
                         json.put("breaks_between_sets", ex.getBreaksBetweenExercieses());
 
                         Request r = new Request("POST", params, json.toString());
@@ -111,18 +115,17 @@ public class ExerciseDetailsFragment extends Fragment {
         changeExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(flag == 1){
+                if (flag == 1) {
                     flag = 0;
-                    Log.d("adi", "onClick:aaaaa");
                     List<String> params = new ArrayList<>();
                     params.add("exercises");
-                    params.add("1");
+                    try{
+                        params.add(readFromFile(getContext()));
+                    } catch (IOException e){Log.d("TAG","Error reading file");}
                     params.add(Constants.readFromFile(getActivity().getApplicationContext()));
                     params.add("get_replacement");
                     JSONObject json = new JSONObject();
 
-                    //json.put("username", username.getText().toString());
-                    //json.put("password", password.getText().toString());
                     Request r = new Request("GET", params, null);
 
                     new HttpRequest(new AsyncResponse() {
@@ -145,33 +148,56 @@ public class ExerciseDetailsFragment extends Fragment {
             }
         });
 
-    startChrono.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.timer:
-                    chrono.setBase(SystemClock.elapsedRealtime() + time);
-                    chrono.start();
-                    break;
+        exerciseName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentCommunicator.passData(new Object[]{"exerciseInformationFragment", exerciseName.getText().toString()});
             }
-        }
-    });
+        });
+
+        startChrono.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.timer:
+                        chrono.setBase(SystemClock.elapsedRealtime() + time);
+                        chrono.start();
+                        break;
+                }
+            }
+        });
      /*   btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });*/
-}
+    }
 
-    public static void readFromFile() throws IOException {
-        String fileName="res/user_id.txt";
-        FileReader inputFile = new FileReader(fileName);
-        BufferedReader bufferReader = new BufferedReader(inputFile);
-        String line;
+    public String readFromFile(Context context) throws IOException {
+        String userId;
+        try {
+            InputStream inputStream = context.openFileInput("user_id.txt");
 
-        while ((line = bufferReader.readLine()) != null)   {
-            System.out.println(line);
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                userId = stringBuilder.toString();
+                return userId;
+            } else
+                return null;
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
         }
-        bufferReader.close();
+        return null;
     }
 }

@@ -91,7 +91,7 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
-        Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
     }
 
     class MyAdapter extends BaseAdapter {

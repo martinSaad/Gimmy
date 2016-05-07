@@ -13,6 +13,8 @@ import android.webkit.WebView;
 
 
 public class ExerciseInformationFragment extends Fragment {
+
+    String machineName = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_exercise_information, container, false);
@@ -22,10 +24,6 @@ public class ExerciseInformationFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //WebView myWebView = (WebView)getActivity().findViewById(R.id.webView);
-        //myWebView.loadUrl("<iframe width=\"854\" height=\"480\" src=\"https://www.youtube.com/embed/Ho32Oh6b4jc\" frameborder=\"0\" allowfullscreen></iframe>");
-        //WebSettings webSettings = myWebView.getSettings();
-        //webSettings.setJavaScriptEnabled(true);
 
         WebView myWebView = (WebView)getActivity().findViewById( R.id.webView );
         myWebView.getSettings().setJavaScriptEnabled(true);

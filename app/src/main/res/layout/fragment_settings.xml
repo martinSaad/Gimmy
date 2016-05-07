@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.martinsaad.hackidc.SettingsActivity"
+    tools:context="com.example.martinsaad.hackidc.SettingsFragment"
     android:orientation="vertical">
 
     <EditText
@@ -62,8 +62,8 @@
             android:layout_height="wrap_content"
             android:inputType="numberSigned"
             android:ems="10"
-            android:hint="Rest Time"
-            android:id="@+id/editRestTimeSets"
+            android:hint="Rest Between Sets"
+            android:id="@+id/editText_Settings_restTimeSets"
             android:layout_weight="1"
             android:layout_marginTop="30dp" />
 
@@ -73,8 +73,8 @@
             android:layout_height="wrap_content"
             android:inputType="numberSigned"
             android:ems="10"
-            android:hint="Rest Time"
-            android:id="@+id/editRestTimeExercise"
+            android:hint="Rest Between Exercises"
+            android:id="@+id/editText_Settings_restTimeExercise"
             android:layout_weight="1"
             android:layout_marginTop="30dp" />
 
@@ -84,7 +84,7 @@
             android:inputType="numberSigned"
             android:ems="10"
             android:hint="My Weight"
-            android:id="@+id/editweight"
+            android:id="@+id/editText_Settings_weight"
             android:layout_weight="1"
             android:layout_marginTop="30dp" />
     </LinearLayout>
@@ -93,9 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save Changes"
-        android:id="@+id/button_Settings_buttonRegister"
+        android:id="@+id/button_Settings_buttonSaveChanges"
         android:layout_gravity="center"
         android:layout_marginTop="30dp" />
-
-
 </LinearLayout>
