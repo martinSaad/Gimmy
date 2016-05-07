@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +32,7 @@ public class ExerciseDetailsFragment extends Fragment {
     ImageButton startChrono;
     Chronometer chrono;
     long time = 0;
+    static int flag = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,9 +43,10 @@ public class ExerciseDetailsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ImageButton btn = (ImageButton) getActivity().findViewById(R.id.button_swap_excerise);
-        ImageButton nextBtn = (ImageButton) getActivity().findViewById(R.id.next);
-        ImageButton changeExercise = (ImageButton) getActivity().findViewById(R.id.button_swap_excerise);
+       // final ImageButton btn = (ImageButton) getActivity().findViewById(R.id.button_swap_exercise);
+        final ImageButton nextBtn = (ImageButton) getActivity().findViewById(R.id.next);
+        final ImageButton changeExercise = (ImageButton) getActivity().findViewById(R.id.button_swap_exercise);
+        final TextView exersiceName = (TextView)getActivity().findViewById(R.id.ExerciseName);
         startChrono = (ImageButton)getActivity().findViewById(R.id.timer);
         chrono = (Chronometer)getActivity().findViewById(R.id.chronometer);
 
@@ -64,8 +68,11 @@ public class ExerciseDetailsFragment extends Fragment {
         changeExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(flag == 1){
+                flag = 0;
                 Log.d("adi", "onClick:aaaaa");
                 List<String> params = new ArrayList<>();
+                params.add("exercises");
                 params.add("1");
                 params.add("get_replacement");
                 JSONObject json = new JSONObject();
@@ -80,8 +87,23 @@ public class ExerciseDetailsFragment extends Fragment {
                             if (output==null){
                                 //Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_SHORT).show();
                             }
-                            else{
-                                System.out.println(output);
+                            else {
+                                JSONArray jsonArray = new JSONArray();
+                                jsonArray.put(output);
+                                JSONObject Jobject = null;
+                                try {
+                                    JSONArray finalJson = new JSONArray();
+                                    finalJson.put(jsonArray);
+                                    Jobject = new JSONObject();
+                                    Jobject = finalJson.getJSONObject(0);
+                                } catch (JSONException e) {
+                                    System.out.println("2222222");
+                                    e.printStackTrace();
+                                }
+                                System.out.println(Jobject.toString());
+                                System.out.println("**********");
+                                exersiceName.setText("aaaa");
+                                //System.out.println(output);
                             }
                         }
                     }).execute(r, null, null);
@@ -89,6 +111,11 @@ public class ExerciseDetailsFragment extends Fragment {
 
 
             }
+            else{
+
+            }
+            }
+
 
         });
 
@@ -106,11 +133,11 @@ public class ExerciseDetailsFragment extends Fragment {
 
 
 
-        btn.setOnClickListener(new View.OnClickListener() {
+     /*   btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
-        });
+        });*/
     }
     public static void readFromFile() throws IOException {
         String fileName="res/user_id.txt";
