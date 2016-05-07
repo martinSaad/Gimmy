@@ -18,6 +18,7 @@ public class ExerciseDetailsFragment extends Fragment {
     ImageButton startChrono;
     Chronometer chrono;
     long time = 0;
+    FragmentCommunicator fragmentCommunicator;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,12 +28,12 @@ public class ExerciseDetailsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        fragmentCommunicator = (FragmentCommunicator) getActivity();
+        fragmentCommunicator.passString("enableDrawer");
         ImageButton btn = (ImageButton) getActivity().findViewById(R.id.button_swap_excerise);
         ImageButton nextBtn = (ImageButton) getActivity().findViewById(R.id.next);
         startChrono = (ImageButton)getActivity().findViewById(R.id.timer);
         chrono = (Chronometer)getActivity().findViewById(R.id.chronometer);
-
 
         final EditText set1,set2,set3,set4,set5;
         set1 = (EditText) getActivity().findViewById(R.id.newSet1);

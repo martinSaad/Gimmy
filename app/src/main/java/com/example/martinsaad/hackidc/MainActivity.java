@@ -1,7 +1,6 @@
 package com.example.martinsaad.hackidc;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,6 +22,8 @@ public class MainActivity extends AppCompatActivity
     SettingsFragment settingsFragment;
     ExerciseDetailsFragment exerciseDetailsFragment;
     ExerciseListFragment exerciseListFragment;
+    PerformanceFragment performanceFragment;
+    RegisterFragment registerFragment;
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
 
@@ -44,9 +45,13 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        loginFragment = new LoginFragment();
+
+        performanceFragment = new PerformanceFragment();
+        fragmentTransaction.add(R.id.main_frag_container, performanceFragment, "performanceFragment");
+        fragmentTransaction.show(performanceFragment).addToBackStack("performanceFragment").commit();
+/*        loginFragment = new LoginFragment();
         fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
-        fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
+        fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();*/
 
         //TODO erase stack
 
@@ -106,21 +111,20 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.nav_logout:
                 deleteFile("user_id.txt");
+                loginFragment = new LoginFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentTransaction.replace(R.id.main_frag_container, loginFragment, "loginFragment");
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+
+            case R.id.nav_performance:
+                performanceFragment = new PerformanceFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container, performanceFragment, "performanceFragment");
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
         }
-
-        /*if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -140,12 +144,10 @@ public class MainActivity extends AppCompatActivity
     public String passString(String text) {
         switch (text){
             case "loginFragment":
-/*                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.main_frag_container,studentEditDetailsFragment, "studentEditDetailsFragment");
-                fragmentTransaction.addToBackStack("studentEditDetailsFragment").commit();
-                break;*/
-            case "logout":
-
+                loginFragment = new LoginFragment();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container,loginFragment, "loginFragment");
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
 
             case "cancelDrawer":
@@ -156,7 +158,28 @@ public class MainActivity extends AppCompatActivity
                 setDrawerState(true);
                 break;
 
+            case "exerciseDetailsFragment":
+                exerciseDetailsFragment = new ExerciseDetailsFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container, exerciseDetailsFragment, "exerciseDetailsFragment");
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+
             case "exerciseList":
+                exerciseListFragment = new ExerciseListFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container, exerciseListFragment, "exerciseListFragment");
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+
+            case "registerFragment":
+                registerFragment = new RegisterFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container, registerFragment, "registerFragment");
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+
+            case "exerciseListFragment":
                 exerciseListFragment = new ExerciseListFragment();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_frag_container, exerciseListFragment, "exerciseListFragment");

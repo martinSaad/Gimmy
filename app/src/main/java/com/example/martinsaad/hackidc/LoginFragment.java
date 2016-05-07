@@ -2,7 +2,6 @@ package com.example.martinsaad.hackidc;
 
 
 import android.content.Context;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -12,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.FileOutputStream;
@@ -52,16 +53,16 @@ public class LoginFragment extends Fragment {
                     new HttpRequest(new AsyncResponse() {
                         @Override
                         public void processFinish(String output) {
-                            if (output==null){
-                                //Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_SHORT).show();
+                            if(output == null || output.equals("error")){
+                                Toast.makeText(getActivity().getApplicationContext(), "wrong credentials", Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 //save user id to file
                                 writeToFile(output);
+                                fragmentCommunicator.passString("exerciseDetailsFragment");
                             }
                         }
                     }).execute(r, null, null);
-                    //startActivity(mainIntent);
                 }catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -71,7 +72,7 @@ public class LoginFragment extends Fragment {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentCommunicator.passString("exerciseList");
+                fragmentCommunicator.passString("registerFragment");
             }
         });
     }
