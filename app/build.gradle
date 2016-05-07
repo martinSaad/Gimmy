@@ -34,8 +34,8 @@ dependencies {
     compile 'com.android.support:design:23.3.0'
     compile 'org.json:json:20160212'
     compile 'org.apache.logging.log4j:log4j:2.5'
-    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.code.gson:gson:2.5'
     compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.jjoe64:graphview:4.0.0'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }

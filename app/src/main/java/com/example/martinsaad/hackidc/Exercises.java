@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by martinsaad on 07/05/2016.
  */
-public class Exercies {
+public class Exercises {
     private String id;
     @SerializedName("training_plan")
     private String trainingPlan;
@@ -138,8 +138,8 @@ public class Exercies {
 
     public class ExerciseInstance{
         private String id;
-        @SerializedName("gym_machine")
-        private GymMachine gymMachine;
+        @SerializedName("gym_machine_instance")
+        private GymMachine gymMachineInstance;
         private String name;
         private String muscle;
         private String level;
@@ -155,11 +155,11 @@ public class Exercies {
         }
 
         public GymMachine getGymMachine() {
-            return gymMachine;
+            return gymMachineInstance;
         }
 
         public void setGymMachine(GymMachine gymMachine) {
-            this.gymMachine = gymMachine;
+            this.gymMachineInstance = gymMachine;
         }
 
         public String getName() {
