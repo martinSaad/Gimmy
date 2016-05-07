@@ -20,9 +20,10 @@ public class MainActivity extends AppCompatActivity
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     LoginFragment loginFragment;
+    ExerciseListFragment exerciseListFragment;
     SettingsFragment settingsFragment;
     ExerciseDetailsFragment exerciseDetailsFragment;
-    ExerciseListFragment exerciseListFragment;
+    //ExerciseListFragment exerciseListFragment;
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
 
@@ -44,9 +45,13 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        loginFragment = new LoginFragment();
-        fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
-        fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
+//        loginFragment = new LoginFragment();
+//        fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
+//        fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
+
+        exerciseListFragment = new ExerciseListFragment();
+        fragmentTransaction.add(R.id.main_frag_container, exerciseListFragment, "exerciseListFragment");
+        fragmentTransaction.show(exerciseListFragment).addToBackStack("exerciseListFragment").commit();
 
         //TODO erase stack
 

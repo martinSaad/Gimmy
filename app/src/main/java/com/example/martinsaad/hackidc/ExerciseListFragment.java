@@ -1,17 +1,123 @@
 package com.example.martinsaad.hackidc;
 
 
+
+
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class ExerciseListFragment extends Fragment {
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
+public class ExerciseListFragment extends ListFragment implements OnItemClickListener {
+
+
+    List<Exercies> data = null;
+    MyAdapter adapter = null;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_exercise_list, container, false);
+    }
+
+
+
+    private void handleJson(String response){
+        try {
+            Gson gson = new Gson();
+            JSONArray arr = new JSONArray(response);
+            for (int i=0; i<arr.length(); i++){
+                JSONObject obj = arr.getJSONObject(i);
+                Exercies ex = gson.fromJson(obj.toString(), Exercies.class);
+                data.add(ex);
+            }
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        data = new ArrayList<>();
+        getListView().setOnItemClickListener(this);
+
+        String userId = Constants.readFromFile(getActivity().getApplicationContext());
+
+        List<String> parameters = new ArrayList<>();
+        parameters.add(Constants.TRAINEES);
+        parameters.add(userId);
+        parameters.add(Constants.GET_CURRENT_TRAINING_PLAN_EXERCIESES);
+        Request r = new Request("GET", parameters, null);
+
+        try {
+            new HttpRequest(new AsyncResponse() {
+                @Override
+                public void processFinish(String output) {
+                    handleJson(output);
+                    adapter = new MyAdapter();
+                    setListAdapter(adapter);
+                }
+            }).execute(r, null, null);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
+        Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    class MyAdapter extends BaseAdapter {
+        @Override
+        public int getCount() {
+            return data.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return data.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if(convertView == null){
+                LayoutInflater inflater =  getActivity().getLayoutInflater();
+                convertView = inflater.inflate(R.layout.tableview_row_exercise_list,null);
+                Log.d("TAG", "create view:" + position);
+            }
+
+            else {
+                Log.d("TAG", "use convert view:" + position);
+            }
+
+            TextView name = (TextView) convertView.findViewById(R.id.textView_Row_exercise_name);
+            name.setText(data.get(position).getExerciseInstance().getName());
+            return convertView;
+        }
+    }
 }
