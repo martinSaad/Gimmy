@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class ExerciseDetailsFragment extends Fragment {
     ImageButton startChrono;
     Chronometer chrono;
@@ -73,9 +72,9 @@ public class ExerciseDetailsFragment extends Fragment {
         String[] arr = ex.getLatestExercieseProgress().getWeight().split(",");
         set1.setText(arr[0]);
         set2.setText(arr[1]);
-        set3.setText(arr[2]);
-        set4.setText(arr[3]);
-        set5.setText(arr[4]);
+        set3.setText("28");
+        set4.setText("31");
+        set5.setText("26");
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
