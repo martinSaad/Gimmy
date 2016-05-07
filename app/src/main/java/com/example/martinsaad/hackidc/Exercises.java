@@ -9,7 +9,7 @@ public class Exercises {
     private String id;
     @SerializedName("training_plan")
     private String trainingPlan;
-    @SerializedName("latest_exerciese_progress")
+    @SerializedName("lastest_exercise_progress")
     private LatestExercieseProgress latestExercieseProgress;
     @SerializedName("exercise_instance")
     private ExerciseInstance exerciseInstance;

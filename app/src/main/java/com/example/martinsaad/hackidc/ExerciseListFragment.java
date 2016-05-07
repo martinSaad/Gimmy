@@ -3,24 +3,21 @@ package com.example.martinsaad.hackidc;
 import android.content.Context;
 import android.os.Bundle;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -65,6 +62,8 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
             getListView().setOnItemClickListener(this);
             fragmentCommunicator.passString("enableDrawer");
 
+            FloatingActionButton floationButton = (FloatingActionButton) getActivity().findViewById(R.id.button_exercise_list);
+
             List<String> parameters = new ArrayList<>();
             parameters.add(Constants.TRAINEES);
             parameters.add(userId);
@@ -83,6 +82,13 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            floationButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    fragmentCommunicator.passData(new Object[]{"exerciseDetailsFragment", data});
+                }
+            });
         }
         else {
             fragmentCommunicator.passString("loginFragment");
@@ -91,7 +97,7 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,long id) {
-        Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
     }
 
     class MyAdapter extends BaseAdapter {
@@ -144,7 +150,6 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
 
                 inputStream.close();
                 userId = stringBuilder.toString();
-                Toast.makeText(context.getApplicationContext(), userId, Toast.LENGTH_SHORT).show();
                 return true;
             }
             else
