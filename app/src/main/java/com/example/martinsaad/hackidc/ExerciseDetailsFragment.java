@@ -14,18 +14,12 @@ import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
-
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -40,7 +34,7 @@ public class ExerciseDetailsFragment extends Fragment {
     long time = 0;
     FragmentCommunicator fragmentCommunicator;
     static int flag = 1;
-    List<Exercises> data = null;
+    List<Exercises> data;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -151,7 +145,7 @@ public class ExerciseDetailsFragment extends Fragment {
         exerciseName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentCommunicator.passData(new Object[]{"exerciseInformationFragment", exerciseName.getText().toString()});
+                fragmentCommunicator.passData(new Object[]{"exerciseInformationFragment", data});
             }
         });
 

@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity
                 exerciseInformationFragment = new ExerciseInformationFragment();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_frag_container, exerciseInformationFragment, "exerciseInformationFragment");
-                exerciseInformationFragment.machineName = (String) data[1];
+                exerciseInformationFragment.data = (List<Exercises>) data[1];
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
         }

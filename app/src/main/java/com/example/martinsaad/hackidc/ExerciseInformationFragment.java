@@ -11,10 +11,13 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import java.util.List;
+
 
 public class ExerciseInformationFragment extends Fragment {
 
-    String machineName = null;
+    List<Exercises> data;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_exercise_information, container, false);

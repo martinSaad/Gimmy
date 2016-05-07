@@ -17,6 +17,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="18dp"
         android:src="@drawable/start"
+        android:id="@+id/button_exercise_list"
         app:layout_anchor="@android:id/list"
         app:layout_anchorGravity="bottom|right|end" />
 
