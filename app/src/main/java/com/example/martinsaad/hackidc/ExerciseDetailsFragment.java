@@ -13,6 +13,9 @@ import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,35 +50,75 @@ public class ExerciseDetailsFragment extends Fragment {
         fragmentCommunicator.passString("enableDrawer");
         final ImageButton nextBtn = (ImageButton) getActivity().findViewById(R.id.next);
         final ImageButton changeExercise = (ImageButton) getActivity().findViewById(R.id.button_swap_exercise);
-        final TextView exerciseName = (TextView)getActivity().findViewById(R.id.ExerciseName);
-        startChrono = (ImageButton)getActivity().findViewById(R.id.timer);
-        chrono = (Chronometer)getActivity().findViewById(R.id.chronometer);
+        TextView exerciseName = (TextView) getActivity().findViewById(R.id.ExerciseName);
+        startChrono = (ImageButton) getActivity().findViewById(R.id.timer);
+        chrono = (Chronometer) getActivity().findViewById(R.id.chronometer);
 
-        final EditText set1,set2,set3,set4,set5;
-        set1 = (EditText) getActivity().findViewById(R.id.newSet1);
-        set2 = (EditText) getActivity().findViewById(R.id.newSet2);
-        set3 = (EditText) getActivity().findViewById(R.id.newSet3);
-        set4 = (EditText) getActivity().findViewById(R.id.newSet4);
-        set5 = (EditText) getActivity().findViewById(R.id.newSet5);
+        final EditText newSet1, newSet2, newSet3, newSet4, newSet5;
+        newSet1 = (EditText) getActivity().findViewById(R.id.newSet1);
+        newSet2 = (EditText) getActivity().findViewById(R.id.newSet2);
+        newSet3 = (EditText) getActivity().findViewById(R.id.newSet3);
+        newSet4 = (EditText) getActivity().findViewById(R.id.newSet4);
+        newSet5 = (EditText) getActivity().findViewById(R.id.newSet5);
+
+        TextView set1, set2, set3, set4, set5;
+        set1 = (TextView) getActivity().findViewById(R.id.Set1);
+        set2 = (TextView) getActivity().findViewById(R.id.Set2);
+        set3 = (TextView) getActivity().findViewById(R.id.Set3);
+        set4 = (TextView) getActivity().findViewById(R.id.Set4);
+        set5 = (TextView) getActivity().findViewById(R.id.Set5);
+
+        final Exercises ex = data.get(0);
+
+        //set values
+        exerciseName.setText(ex.getExerciseInstance().getName());
+        String[] arr = ex.getLatestExercieseProgress().getWeight().split(",");
+        set1.setText(arr[0]);
+        set2.setText(arr[1]);
+        set3.setText(arr[2]);
+        set4.setText(arr[3]);
+        set5.setText(arr[4]);
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("IDC",set1.getText().toString()+","+set2.getText().toString()+","+set3.getText().toString()+","+set4.getText().toString()+","+set5.getText().toString());
+                if (flag == 1) {
+                    List<String> params = new ArrayList<>();
+                    params.add(Constants.TRAINING_PLAN_EXERCISE_PROGRESSES);
+                    JSONObject json = new JSONObject();
+                    try {
+                        json.put("training_plan_exercise_details", ex.getId());
+                        json.put("sets", 5);
+                        json.put("weight", newSet1.getText().toString()+","+newSet2.getText().toString()+","+newSet3.getText().toString()+","+newSet4.getText().toString()+","+newSet5.getText().toString());
+                        json.put("breaks_between_sets", ex.getBreaksBetweenExercieses());
+
+                        Request r = new Request("POST", params, json.toString());
+
+                        new HttpRequest(new AsyncResponse() {
+                            @Override
+                            public void processFinish(String output) {
+
+                            }
+                        }).execute(r, null, null);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Log.d("IDC", newSet1.getText().toString() + "," + newSet2.getText().toString() + "," + newSet3.getText().toString() + "," + newSet4.getText().toString() + "," + newSet5.getText().toString());
             }
         });
 
         changeExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(flag == 1){
-                flag = 0;
-                Log.d("adi", "onClick:aaaaa");
-                List<String> params = new ArrayList<>();
-                params.add("exercises");
-                params.add("1");
-                params.add("get_replacement");
-                JSONObject json = new JSONObject();
+                if (flag == 1) {
+                    flag = 0;
+                    Log.d("adi", "onClick:aaaaa");
+                    List<String> params = new ArrayList<>();
+                    params.add("exercises");
+                    params.add(Constants.readFromFile(getActivity().getApplicationContext()));
+                    params.add("get_replacement");
+                    JSONObject json = new JSONObject();
 
                     //json.put("username", username.getText().toString());
                     //json.put("password", password.getText().toString());
@@ -84,36 +127,20 @@ public class ExerciseDetailsFragment extends Fragment {
                     new HttpRequest(new AsyncResponse() {
                         @Override
                         public void processFinish(String output) {
-                            if (output==null){
-                                //Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                JSONArray jsonArray = new JSONArray();
-                                jsonArray.put(output);
-                                JSONObject Jobject = null;
-                                try {
-                                    JSONArray finalJson = new JSONArray();
-                                    finalJson.put(jsonArray);
-                                    Jobject = new JSONObject();
-                                    Jobject = finalJson.getJSONObject(0);
-                                } catch (JSONException e) {
-                                    System.out.println("2222222");
-                                    e.printStackTrace();
-                                }
-                                System.out.println(Jobject.toString());
-                                System.out.println("**********");
-                                exerciseName.setText("aaaa");
-                                //System.out.println(output);
+                            try {
+                                JSONArray jsonArray = new JSONArray(output);
+                                JSONObject Jobject = jsonArray.getJSONObject(0);
+                                Gson gson = new Gson();
+                                Exercises e = gson.fromJson(Jobject.toString(), Exercises.class);
+                                //exerciseName.setText(e.getExerciseInstance().getName());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
                         }
                     }).execute(r, null, null);
-                    //startActivity(mainIntent);
+                } else {
 
-
-            }
-            else{
-
-            }
+                }
             }
 
 
@@ -122,34 +149,13 @@ public class ExerciseDetailsFragment extends Fragment {
         startChrono.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (v.getId()){
+                switch (v.getId()) {
                     case R.id.timer:
-                        chrono.setBase(SystemClock.elapsedRealtime()+time);
+                        chrono.setBase(SystemClock.elapsedRealtime() + time);
                         chrono.start();
                         break;
                 }
             }
         });
-
-
-
-     /*   btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });*/
     }
-    public static void readFromFile() throws IOException {
-        String fileName="res/user_id.txt";
-        FileReader inputFile = new FileReader(fileName);
-        BufferedReader bufferReader = new BufferedReader(inputFile);
-        String line;
-
-        while ((line = bufferReader.readLine()) != null)   {
-            System.out.println(line);
-        }
-        bufferReader.close();
-    }
-
-
 }

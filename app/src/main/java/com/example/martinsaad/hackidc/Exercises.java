@@ -138,8 +138,8 @@ public class Exercises {
 
     public class ExerciseInstance{
         private String id;
-        @SerializedName("gym_machine")
-        private GymMachine gymMachine;
+        @SerializedName("gym_machine_instance")
+        private GymMachine gymMachineInstance;
         private String name;
         private String muscle;
         private String level;
@@ -155,11 +155,11 @@ public class Exercises {
         }
 
         public GymMachine getGymMachine() {
-            return gymMachine;
+            return gymMachineInstance;
         }
 
         public void setGymMachine(GymMachine gymMachine) {
-            this.gymMachine = gymMachine;
+            this.gymMachineInstance = gymMachine;
         }
 
         public String getName() {
