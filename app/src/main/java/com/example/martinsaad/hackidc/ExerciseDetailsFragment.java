@@ -13,6 +13,17 @@ import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 public class ExerciseDetailsFragment extends Fragment {
@@ -50,6 +61,39 @@ public class ExerciseDetailsFragment extends Fragment {
             }
         });
 
+        changeExercise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                List<String> params = new ArrayList<>();
+                params.add(Constants.USER_LOGIN);
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("username", username.getText().toString());
+                    json.put("password", password.getText().toString());
+                    Request r = new Request("POST", params, json.toString());
+
+                    new HttpRequest(new AsyncResponse() {
+                        @Override
+                        public void processFinish(String output) {
+                            if (output==null){
+                                //Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                //save user id to file
+                                writeToFile(output);
+                            }
+                        }
+                    }).execute(r, null, null);
+                    //startActivity(mainIntent);
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                } */
+
+            }
+
+        });
+
         startChrono.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,5 +114,17 @@ public class ExerciseDetailsFragment extends Fragment {
             }
         });
     }
+    public static void readFromFile() throws IOException {
+        String fileName="res/user_id.txt";
+        FileReader inputFile = new FileReader(fileName);
+        BufferedReader bufferReader = new BufferedReader(inputFile);
+        String line;
+
+        while ((line = bufferReader.readLine()) != null)   {
+            System.out.println(line);
+        }
+        bufferReader.close();
+    }
+
 
 }
