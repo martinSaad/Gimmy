@@ -2,6 +2,7 @@ package com.example.martinsaad.hackidc;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +13,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentCommunicator {
@@ -19,7 +25,16 @@ public class MainActivity extends AppCompatActivity
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     LoginFragment loginFragment;
+    SettingsFragment settingsFragment;
     ExerciseDetailsFragment exerciseDetailsFragment;
+    ExerciseListFragment exerciseListFragment;
+    DrawerLayout drawer;
+    ActionBarDrawerToggle toggle;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +44,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
@@ -40,12 +55,14 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        loginFragment = new LoginFragment();
+        //loginFragment = new LoginFragment();
+        /*
+        fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
+        fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
+        */
         exerciseDetailsFragment = new ExerciseDetailsFragment();
-        fragmentTransaction.add(R.id.main_frag_container, exerciseDetailsFragment, "exerciseDetailesFragment");
-        fragmentTransaction.show(exerciseDetailsFragment).addToBackStack("exerciseDetailesFragment").commit();
-        //fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
-        //fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
+        fragmentTransaction.add(R.id.main_frag_container, exerciseDetailsFragment, "exerciseDetailsFragment");
+        fragmentTransaction.show(exerciseDetailsFragment).addToBackStack("exerciseDetailsFragment").commit();
 
 
         //TODO erase stack
@@ -54,7 +71,11 @@ public class MainActivity extends AppCompatActivity
 //            Intent LoginActivity = new Intent(this, LoginActivity.class);
 //            startActivity(LoginActivity);
 //        }
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -93,6 +114,21 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        switch (id) {
+            case R.id.nav_manage_exercise:
+                break;
+
+            case R.id.nav_settings:
+                settingsFragment = new SettingsFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container, settingsFragment, "settingsFragment");
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
+
+            case R.id.nav_logout:
+                deleteFile("user_id.txt");
+        }
+
         /*if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
@@ -123,14 +159,91 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public String passString(String text) {
-        switch (getActiveFragmentTag()){
+        switch (text) {
             case "loginFragment":
 /*                fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.main_frag_container,studentEditDetailsFragment, "studentEditDetailsFragment");
                 fragmentTransaction.addToBackStack("studentEditDetailsFragment").commit();
                 break;*/
+            case "logout":
+
+                break;
+
+            case "cancelDrawer":
+                setDrawerState(false);
+                break;
+
+            case "enableDrawer":
+                setDrawerState(true);
+                break;
+
+            case "exerciseList":
+                exerciseListFragment = new ExerciseListFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container, exerciseListFragment, "exerciseListFragment");
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
         }
         return null;
+    }
+
+    public void setDrawerState(boolean isEnabled) {
+        if (isEnabled) {
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            toggle.setDrawerIndicatorEnabled(true);
+            toggle.syncState();
+
+        } else {
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            toggle.setDrawerIndicatorEnabled(false);
+            toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onSupportNavigateUp();
+                }
+            });
+            toggle.syncState();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.martinsaad.hackidc/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.example.martinsaad.hackidc/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
     }
 }
 

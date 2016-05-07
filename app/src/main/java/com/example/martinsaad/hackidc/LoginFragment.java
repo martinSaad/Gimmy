@@ -1,12 +1,14 @@
 package com.example.martinsaad.hackidc;
 
 
-import android.app.Fragment;
+
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,7 @@ public class LoginFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         fragmentCommunicator = (FragmentCommunicator) getActivity();
+        fragmentCommunicator.passString("cancelDrawer");
         Button loginButton = (Button) getActivity().findViewById(R.id.button_Login);
         Button registerButton = (Button) getActivity().findViewById(R.id.button_registerLogin);
         final EditText username = (EditText) getActivity().findViewById(R.id.editText_usernameLogin);
@@ -77,27 +80,25 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        Button registerButton = (Button) findViewById(R.id.button_registerLogin);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(registerIntent);
+                fragmentCommunicator.passString("exerciseList");
             }
         });
     }
 
     private void writeToFile(String userId) {
-        String filename = "res/user_id.txt";
-        String string = userId;
+        String filename = "user_id.txt";
         FileOutputStream outputStream;
 
         try {
-            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(string.getBytes());
+            outputStream = getActivity().getApplicationContext().openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(userId.getBytes());
             outputStream.close();
+            Log.d("IDC", "success");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

@@ -31,7 +31,7 @@ public class RegisterFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         fragmentCommunicator = (FragmentCommunicator) getActivity();
-
+        fragmentCommunicator.passString("cancelDrawer");
         Button registerButton = (Button) getActivity().findViewById(R.id.button_Register_buttonRegister);
         final EditText firstName = (EditText) getActivity().findViewById(R.id.editText_Register_firstName);
         final EditText lastName = (EditText) getActivity().findViewById(R.id.editText_Register_lastName);

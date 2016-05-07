@@ -64,14 +64,15 @@ public class ExerciseDetailsFragment extends Fragment {
         changeExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
+                Log.d("adi", "onClick:aaaaa");
                 List<String> params = new ArrayList<>();
-                params.add(Constants.USER_LOGIN);
+                params.add("1");
+                params.add("get_replacement");
                 JSONObject json = new JSONObject();
-                try {
-                    json.put("username", username.getText().toString());
-                    json.put("password", password.getText().toString());
-                    Request r = new Request("POST", params, json.toString());
+
+                    //json.put("username", username.getText().toString());
+                    //json.put("password", password.getText().toString());
+                    Request r = new Request("GET", params, null);
 
                     new HttpRequest(new AsyncResponse() {
                         @Override
@@ -80,15 +81,12 @@ public class ExerciseDetailsFragment extends Fragment {
                                 //Toast.makeText(getApplicationContext(), "wrong credentials", Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                //save user id to file
-                                writeToFile(output);
+                                System.out.println(output);
                             }
                         }
                     }).execute(r, null, null);
                     //startActivity(mainIntent);
-                }catch (JSONException e) {
-                    e.printStackTrace();
-                } */
+
 
             }
 
