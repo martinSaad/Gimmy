@@ -1,10 +1,13 @@
 package com.example.martinsaad.hackidc;
 
 
+
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +41,6 @@ public class LoginFragment extends Fragment {
         Button registerButton = (Button) getActivity().findViewById(R.id.button_registerLogin);
         final EditText username = (EditText) getActivity().findViewById(R.id.editText_usernameLogin);
         final EditText password = (EditText) getActivity().findViewById(R.id.editText_passwordLogin);
-
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

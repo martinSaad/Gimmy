@@ -19,7 +19,7 @@
             android:layout_height="39dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Exercise Name"
-            android:id="@+id/textView"
+            android:id="@+id/ExerciseName"
             android:layout_marginTop="30dp"
             android:layout_weight="1.04" />
         <FrameLayout
@@ -229,7 +229,7 @@
             android:layout_marginTop="40dp">
 
             <ImageButton
-                android:id="@+id/button_swap_excerise"
+                android:id="@+id/button_swap_exercise"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@drawable/swap_exercise"

@@ -45,13 +45,15 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
         performanceFragment = new PerformanceFragment();
         fragmentTransaction.add(R.id.main_frag_container, performanceFragment, "performanceFragment");
         fragmentTransaction.show(performanceFragment).addToBackStack("performanceFragment").commit();
 /*        loginFragment = new LoginFragment();
         fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
         fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();*/
+//        loginFragment = new LoginFragment();
+//        fragmentTransaction.add(R.id.main_frag_container, loginFragment, "loginFragment");
+//        fragmentTransaction.show(loginFragment).addToBackStack("loginFragment").commit();
 
         //TODO erase stack
 
@@ -162,13 +164,6 @@ public class MainActivity extends AppCompatActivity
                 exerciseDetailsFragment = new ExerciseDetailsFragment();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_frag_container, exerciseDetailsFragment, "exerciseDetailsFragment");
-                fragmentTransaction.addToBackStack(null).commit();
-                break;
-
-            case "exerciseList":
-                exerciseListFragment = new ExerciseListFragment();
-                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.main_frag_container, exerciseListFragment, "exerciseListFragment");
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
 
