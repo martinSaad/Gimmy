@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.martinsaad.hackidc.SettingsFragment"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText_Settings_firstName"
+        android:hint="Change Your Name"
+        android:layout_marginTop="30dp" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText_Settings_lastName"
+        android:hint="Change Your Last Name"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editText_Settings_email"
+        android:hint="Email"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editText_Settings_password"
+        android:hint="password"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editText_Settings_repeatPassword"
+        android:hint="repeat password"
+        android:layout_marginTop="15dp" />
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"
+            android:ems="10"
+            android:hint="Rest Between Exercises"
+            android:id="@+id/editText_Settings_restTimeExercise"
+            android:layout_weight="1"
+            android:layout_marginTop="30dp" />
+
+
+        <EditText
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"
+            android:ems="10"
+            android:hint="My Weight"
+            android:id="@+id/editText_Settings_weight"
+            android:layout_weight="1"
+            android:layout_marginTop="30dp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Changes"
+        android:id="@+id/button_Settings_buttonSaveChanges"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp" />
+</LinearLayout>
