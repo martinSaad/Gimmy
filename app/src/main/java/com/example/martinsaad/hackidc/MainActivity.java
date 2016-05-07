@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     LoginFragment loginFragment;
+
+    //ExerciseListFragment exerciseListFragment;
+    ExerciseInformationFragment exerciseInformationFragment;
+
     SettingsFragment settingsFragment;
     ExerciseDetailsFragment exerciseDetailsFragment;
     ExerciseListFragment exerciseListFragment;

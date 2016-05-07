@@ -19,6 +19,7 @@ public class Constants {
     public final static String TRAINEES = "trainees";
     public final static String USER_LOGIN = "user-log-in";
     public final static String GET_CURRENT_TRAINING_PLAN_EXERCIESES = "get_current_training_plan_exercises";
+    public final static String TRAINING_PLAN_EXERCISE_PROGRESSES = "training-plan-exercise-progresses";
 
 
     public static String readFromFile(Context cnotext) {
