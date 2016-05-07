@@ -52,7 +52,8 @@ public class HttpRequest extends AsyncTask<Request, Void, String> {
         try {
             //add parameters
             for (String parameter : parameters)
-                url+="/" + parameter + "/";
+                url+="/" + parameter;
+            url+="/";
 
             URL obj = new URL(url);
             con = (HttpURLConnection) obj.openConnection();
