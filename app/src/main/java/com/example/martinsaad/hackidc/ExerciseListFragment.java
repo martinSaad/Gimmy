@@ -1,8 +1,6 @@
 package com.example.martinsaad.hackidc;
 
-
-
-
+import android.content.Context;
 import android.os.Bundle;
 
 import android.support.v4.app.ListFragment;
@@ -23,6 +21,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +34,12 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
     FragmentCommunicator fragmentCommunicator;
     List<Exercises> data = null;
     MyAdapter adapter = null;
+    static String userId = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_exercise_list, container, false);
     }
-
-
 
     private void handleJson(String response){
         try {
@@ -56,30 +58,34 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        data = new ArrayList<>();
-        getListView().setOnItemClickListener(this);
         fragmentCommunicator = (FragmentCommunicator) getActivity();
-        fragmentCommunicator.passString("enableDrawer");
+        if (isUserLoggedIn(getActivity().getApplicationContext()) == true) {
+            boolean flag = isUserLoggedIn(getActivity().getApplicationContext());
+            data = new ArrayList<>();
+            getListView().setOnItemClickListener(this);
+            fragmentCommunicator.passString("enableDrawer");
 
-        String userId = Constants.readFromFile(getActivity().getApplicationContext());
+            List<String> parameters = new ArrayList<>();
+            parameters.add(Constants.TRAINEES);
+            parameters.add(userId);
+            parameters.add(Constants.GET_CURRENT_TRAINING_PLAN_EXERCIESES);
+            Request r = new Request("GET", parameters, null);
 
-        List<String> parameters = new ArrayList<>();
-        parameters.add(Constants.TRAINEES);
-        parameters.add(userId);
-        parameters.add(Constants.GET_CURRENT_TRAINING_PLAN_EXERCIESES);
-        Request r = new Request("GET", parameters, null);
-
-        try {
-            new HttpRequest(new AsyncResponse() {
-                @Override
-                public void processFinish(String output) {
-                    handleJson(output);
-                    adapter = new MyAdapter();
-                    setListAdapter(adapter);
-                }
-            }).execute(r, null, null);
-        }catch (Exception e){
-            e.printStackTrace();
+            try {
+                new HttpRequest(new AsyncResponse() {
+                    @Override
+                    public void processFinish(String output) {
+                        handleJson(output);
+                        adapter = new MyAdapter();
+                        setListAdapter(adapter);
+                    }
+                }).execute(r, null, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            fragmentCommunicator.passString("loginFragment");
         }
     }
 
@@ -120,5 +126,35 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
             name.setText(data.get(position).getExerciseInstance().getName());
             return convertView;
         }
+    }
+    public static boolean isUserLoggedIn(Context context){
+
+        try {
+            InputStream inputStream = context.openFileInput("user_id.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                userId = stringBuilder.toString();
+                Toast.makeText(context.getApplicationContext(), userId, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            else
+                return false;
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+        return false;
     }
 }

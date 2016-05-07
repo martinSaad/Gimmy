@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        exerciseDetailsFragment = new ExerciseDetailsFragment();
+        exerciseListFragment = new ExerciseListFragment();
         fragmentTransaction.add(R.id.main_frag_container, exerciseListFragment, "exerciseListFragment");
         fragmentTransaction.show(exerciseListFragment).addToBackStack("exerciseListFragment").commit();
     }
@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity
             case "loginFragment":
                 loginFragment = new LoginFragment();
                 fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentTransaction.replace(R.id.main_frag_container,loginFragment, "loginFragment");
                 fragmentTransaction.addToBackStack(null).commit();
                 break;

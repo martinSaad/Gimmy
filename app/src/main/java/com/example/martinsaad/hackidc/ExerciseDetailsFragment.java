@@ -1,6 +1,7 @@
 package com.example.martinsaad.hackidc;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
@@ -69,13 +70,13 @@ public class ExerciseDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(flag == 1){
-                flag = 0;
-                Log.d("adi", "onClick:aaaaa");
-                List<String> params = new ArrayList<>();
-                params.add("exercises");
-                params.add("1");
-                params.add("get_replacement");
-                JSONObject json = new JSONObject();
+                    flag = 0;
+                    Log.d("adi", "onClick:aaaaa");
+                    List<String> params = new ArrayList<>();
+                    params.add("exercises");
+                    params.add("1");
+                    params.add("get_replacement");
+                    JSONObject json = new JSONObject();
 
                     //json.put("username", username.getText().toString());
                     //json.put("password", password.getText().toString());
@@ -110,13 +111,11 @@ public class ExerciseDetailsFragment extends Fragment {
                     //startActivity(mainIntent);
 
 
-            }
-            else{
+                }
+                else{
 
+                }
             }
-            }
-
-
         });
 
         startChrono.setOnClickListener(new View.OnClickListener() {
@@ -130,15 +129,13 @@ public class ExerciseDetailsFragment extends Fragment {
                 }
             }
         });
-
-
-
      /*   btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });*/
     }
+
     public static void readFromFile() throws IOException {
         String fileName="res/user_id.txt";
         FileReader inputFile = new FileReader(fileName);
@@ -150,6 +147,4 @@ public class ExerciseDetailsFragment extends Fragment {
         }
         bufferReader.close();
     }
-
-
 }

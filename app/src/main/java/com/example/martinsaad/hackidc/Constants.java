@@ -4,7 +4,9 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,8 +25,29 @@ public class Constants {
 
         String ret = "";
 
-        try {
-            InputStream inputStream = cnotext.openFileInput("user_id.txt");
+        File tempFile = new File("user_id.txt");
+        if (tempFile.length() == 0) {
+            return null;
+        } else {
+            StringBuilder text = new StringBuilder();
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(tempFile));
+                String line;
+
+                while ((line = br.readLine()) != null) {
+                    text.append(line);
+                    //text.append('\n');
+                }
+                br.close();
+                return text.toString();
+            } catch (IOException e) {
+                //You'll need to add proper error handling here
+            }
+        }
+        return null;
+    }
+
+            /*InputStream inputStream = cnotext.openFileInput("user_id.txt");
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -38,14 +61,17 @@ public class Constants {
 
                 inputStream.close();
                 ret = stringBuilder.toString();
+                return ret;
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
             Log.e("login activity", "File not found: " + e.toString());
         } catch (IOException e) {
+            e.printStackTrace();
             Log.e("login activity", "Can not read file: " + e.toString());
         }
 
-        return ret;
-    }
+        return null;
+
+    }*/
 }
