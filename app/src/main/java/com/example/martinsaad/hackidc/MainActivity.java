@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity
     LoginFragment loginFragment;
     SettingsFragment settingsFragment;
     ExerciseDetailsFragment exerciseDetailsFragment;
+    ExerciseListFragment exerciseListFragment;
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
 
@@ -102,6 +103,9 @@ public class MainActivity extends AppCompatActivity
                 fragmentTransaction.replace(R.id.main_frag_container, settingsFragment, "settingsFragment");
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
+
+            case R.id.nav_logout:
+                deleteFile("user_id.txt");
         }
 
         /*if (id == R.id.nav_camera) {
@@ -150,6 +154,13 @@ public class MainActivity extends AppCompatActivity
 
             case "enableDrawer":
                 setDrawerState(true);
+                break;
+
+            case "exerciseList":
+                exerciseListFragment = new ExerciseListFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container, exerciseListFragment, "exerciseListFragment");
+                fragmentTransaction.addToBackStack(null).commit();
                 break;
         }
         return null;
