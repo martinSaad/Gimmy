@@ -34,7 +34,6 @@ public class SettingsFragment extends Fragment {
         EditText pass = (EditText) getActivity().findViewById(R.id.editText_Settings_password);
         EditText repeatPass = (EditText) getActivity().findViewById(R.id.editText_Settings_repeatPassword);
         EditText weight = (EditText) getActivity().findViewById(R.id.editText_Settings_weight);
-        EditText restBetweenSets = (EditText) getActivity().findViewById(R.id.editText_Settings_restTimeSets);
         EditText restBetweenMachines = (EditText) getActivity().findViewById(R.id.editText_Settings_restTimeExercise);
 
 

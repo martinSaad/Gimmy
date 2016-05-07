@@ -166,11 +166,6 @@ public class ExerciseDetailsFragment extends Fragment {
                 }
             }
         });
-     /*   btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });*/
     }
 
     public String readFromFile(Context context) throws IOException {
