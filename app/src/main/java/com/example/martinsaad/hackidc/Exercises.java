@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by martinsaad on 07/05/2016.
  */
-public class Exercies {
+public class Exercises {
     private String id;
     @SerializedName("training_plan")
     private String trainingPlan;
