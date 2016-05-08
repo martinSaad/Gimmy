@@ -3,9 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_exercise_details"
+            android:id="@+id/nav_exercise_list"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Exercise Plan Details" />
+            android:title="Todays Exercise Plan" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_gallery"

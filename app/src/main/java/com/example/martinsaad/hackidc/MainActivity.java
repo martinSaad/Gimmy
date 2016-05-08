@@ -21,10 +21,7 @@ public class MainActivity extends AppCompatActivity
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     LoginFragment loginFragment;
-
-    //ExerciseListFragment exerciseListFragment;
     ExerciseInformationFragment exerciseInformationFragment;
-
     SettingsFragment settingsFragment;
     ExerciseDetailsFragment exerciseDetailsFragment;
     ExerciseListFragment exerciseListFragment;
@@ -71,10 +68,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch (id){
-            case R.id.nav_exercise_details:
-                exerciseDetailsFragment = new ExerciseDetailsFragment();
+            case R.id.nav_exercise_list:
+                exerciseListFragment = new ExerciseListFragment();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.main_frag_container, exerciseDetailsFragment, "exerciseDetailsFragment");
+                fragmentTransaction.replace(R.id.main_frag_container, exerciseListFragment, "exerciseListFragment");
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
 
@@ -161,7 +158,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void passData(Object[] data) {
         switch ((String) data[0]) {
-            case "exerciseDetailsFragment":
+            case "exerciseListFragment":
                 exerciseDetailsFragment = new ExerciseDetailsFragment();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_frag_container, exerciseDetailsFragment, "exerciseDetailsFragment");
