@@ -25,9 +25,9 @@ public class DatePicker extends EditText{
     private void init(){
         Calendar calendar = new GregorianCalendar();
         year = calendar.get(Calendar.YEAR);
-//            month = calendar.get(Calendar.MONTH);
-//            day = calendar.get(Calendar.DAY_OF_MONTH);
-//            setText("" + day + "/" + (1+month) + "/" + year);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        setText("" + day + "/" + (1+month) + "/" + year);
     }
 
     public interface OnDateSetListener{
@@ -90,7 +90,7 @@ public class DatePicker extends EditText{
                     DatePicker.this.year = year;
                     DatePicker.this.month = month;
                     DatePicker.this.day = day;
-                    setText("" + day + "/" + (++month) + "/" + year);
+                    setText("" + day + "/" + month + "/" + year);
                     if (listener != null) {
                         listener.dateSet(year, month, day);
                     }

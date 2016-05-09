@@ -133,7 +133,6 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
     public static boolean isUserLoggedIn(Context context){
         HandleFiles handleFiles = new HandleFiles();
         String receivedString = handleFiles.readFromFile(Constants.USER_ID_FILE, context);
-        Log.d("IDC",receivedString);
         if(receivedString == null)
             return false;
         userId = receivedString;
