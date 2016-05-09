@@ -74,8 +74,6 @@ public class HttpRequest extends AsyncTask<Request, Void, String> {
                 response.append(inputLine);
             }
 
-
-
             //print result
             System.out.println("Response: " + response.toString());
 

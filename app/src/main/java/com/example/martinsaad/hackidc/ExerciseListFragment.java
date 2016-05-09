@@ -57,12 +57,11 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
         super.onActivityCreated(savedInstanceState);
         fragmentCommunicator = (FragmentCommunicator) getActivity();
         if (isUserLoggedIn(getActivity().getApplicationContext()) == true) {
-            boolean flag = isUserLoggedIn(getActivity().getApplicationContext());
             data = new ArrayList<>();
             getListView().setOnItemClickListener(this);
             fragmentCommunicator.passString("enableDrawer");
 
-            FloatingActionButton floationButton = (FloatingActionButton) getActivity().findViewById(R.id.button_exercise_list);
+            FloatingActionButton floatingButton = (FloatingActionButton) getActivity().findViewById(R.id.button_exercise_list);
 
             List<String> parameters = new ArrayList<>();
             parameters.add(Constants.TRAINEES);
@@ -83,7 +82,7 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
                 e.printStackTrace();
             }
 
-            floationButton.setOnClickListener(new View.OnClickListener() {
+            floatingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     fragmentCommunicator.passData(new Object[]{"exerciseDetailsFragment", data});
@@ -121,11 +120,9 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
             if(convertView == null){
                 LayoutInflater inflater =  getActivity().getLayoutInflater();
                 convertView = inflater.inflate(R.layout.tableview_row_exercise_list,null);
-                Log.d("TAG", "create view:" + position);
             }
 
             else {
-                Log.d("TAG", "use convert view:" + position);
             }
 
             TextView name = (TextView) convertView.findViewById(R.id.textView_Row_exercise_name);
@@ -134,8 +131,16 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
         }
     }
     public static boolean isUserLoggedIn(Context context){
+        HandleFiles handleFiles = new HandleFiles();
+        String receivedString = handleFiles.readFromFile(Constants.USER_ID_FILE, context);
+        Log.d("IDC",receivedString);
+        if(receivedString == null)
+            return false;
+        userId = receivedString;
+        return true;
+    }
 
-        try {
+/*        try {
             InputStream inputStream = context.openFileInput("user_id.txt");
 
             if ( inputStream != null ) {
@@ -161,5 +166,5 @@ public class ExerciseListFragment extends ListFragment implements OnItemClickLis
             Log.e("login activity", "Can not read file: " + e.toString());
         }
         return false;
-    }
+    }*/
 }

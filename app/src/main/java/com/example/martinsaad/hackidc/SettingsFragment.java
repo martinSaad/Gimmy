@@ -35,7 +35,6 @@ public class SettingsFragment extends Fragment {
 
     FragmentCommunicator fragmentCommunicator;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_settings, container, false);
@@ -44,7 +43,6 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         final EditText name, lname, email, breaks, weight;
 
         name = (EditText) getActivity().findViewById(R.id.editText_Settings_firstName);
@@ -80,14 +78,11 @@ public class SettingsFragment extends Fragment {
                     email.setText(user_email);
                     breaks.setText(user_breaks);
                     weight.setText(user_weight);
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }).execute(r, null, null);
-
     }
 
     public static String userId(Context context) {
@@ -107,7 +102,6 @@ public class SettingsFragment extends Fragment {
 
                 inputStream.close();
                 userId = stringBuilder.toString();
-                Toast.makeText(context.getApplicationContext(), userId, Toast.LENGTH_SHORT).show();
                 return userId;
             } else
                 return null;

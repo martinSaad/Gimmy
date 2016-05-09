@@ -77,16 +77,18 @@ public class LoginFragment extends Fragment {
     }
 
     private void writeToFile(String userId) {
-        String filename = "user_id.txt";
+        HandleFiles handleFiles = new HandleFiles();
+        handleFiles.writeToFile(userId,Constants.USER_ID_FILE, getActivity().getApplicationContext());
+    }
+/*        String filename = "user_id.txt";
         FileOutputStream outputStream;
 
         try {
             outputStream = getActivity().getApplicationContext().openFileOutput(filename, Context.MODE_PRIVATE);
             outputStream.write(userId.getBytes());
             outputStream.close();
-            Log.d("IDC", "success");
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

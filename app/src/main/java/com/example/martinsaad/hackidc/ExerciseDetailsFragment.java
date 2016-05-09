@@ -115,7 +115,7 @@ public class ExerciseDetailsFragment extends Fragment {
                     try{
                         params.add(readFromFile(getContext()));
                     } catch (IOException e){Log.d("TAG","Error reading file");}
-                    params.add(Constants.readFromFile(getActivity().getApplicationContext()));
+                    params.add(new HandleFiles().readFromFile(Constants.USER_ID_FILE,getContext()));
                     params.add("get_replacement");
                     JSONObject json = new JSONObject();
 
@@ -162,30 +162,6 @@ public class ExerciseDetailsFragment extends Fragment {
     }
 
     public String readFromFile(Context context) throws IOException {
-        String userId;
-        try {
-            InputStream inputStream = context.openFileInput("user_id.txt");
-
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ((receiveString = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(receiveString);
-                }
-
-                inputStream.close();
-                userId = stringBuilder.toString();
-                return userId;
-            } else
-                return null;
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        }
-        return null;
+        return (new HandleFiles().readFromFile(Constants.USER_ID_FILE,context));
     }
 }

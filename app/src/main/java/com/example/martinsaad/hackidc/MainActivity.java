@@ -173,6 +173,14 @@ public class MainActivity extends AppCompatActivity
                 exerciseInformationFragment.data = (List<Exercises>) data[1];
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
+
+            case "exerciseDetailsFragment":
+                exerciseDetailsFragment = new ExerciseDetailsFragment();
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_frag_container, exerciseDetailsFragment, "exerciseDetailsFragment");
+                exerciseDetailsFragment.data = (List) data[1];
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
         }
     }
 
